@@ -38,6 +38,7 @@ TODO
 * Output of workon command in the virtualenv install
 * Create the docs folder
 * Refactor the config files to use fabric templates
+* Configure postgres to allow access to the DB from the specific IP's without passwords
 
 
 Indices and tables

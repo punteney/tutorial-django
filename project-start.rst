@@ -70,7 +70,7 @@ Now that the default project is installed we need to configure it. All the setti
 
     * __init__.py - This settings file imports settings in base.py and then looks for an environment variable called "DJANGO_CONFIG_IDENTIFIER" that is used to determine what other settings file should be imported. If no "DJANGO_CONFIG_IDENTIFIER" is specified it will import the dev settings.
     * base.py - This is the primary settings file, the settings in this file apply to all instances of this project (dev, production, staging) and should hold all the common settings.
-    
+    * dev.py - Settings specific to the dev environment. 
 
 
 
