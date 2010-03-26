@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial for Setting up a Complete Django Project &mdash; Django Project Setup v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Project Setup v0.1 documentation" href="#" />
+    <link rel="next" title="Local Dev Setup" href="local-setup.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="local-setup.html" title="Local Dev Setup"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">Django Project Setup v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tutorial-for-setting-up-a-complete-django-project">
+<h1>Tutorial for Setting up a Complete Django Project<a class="headerlink" href="#tutorial-for-setting-up-a-complete-django-project" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial focuses on how to setup and manage your django project. It doesn&#8217;t cover how to write a Django app and project as there are many other tutorials on how to do that. Items this tutorial does include:</p>
+<ul class="simple">
+<li><a class="reference external" href="local-setup.html"><em>Setting up a local dev environment (on OS X)</em></a></li>
+<li>Starting a new project</li>
+<li>Building out the project</li>
+<li>Testing</li>
+<li>Documentation</li>
+<li>Pushing the project to production</li>
+<li>Ongoing work process</li>
+</ul>
+<p>The tutorial will be easier to follow with a basic understanding of python, Django, and command line usage. If you aren&#8217;t familiar with these you might want to check out some of the <a class="reference external" href="learning-resources.html"><em>resources</em></a> to familiarize yourself with them first first.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This tutorial is <strong>how I</strong> set things up and work. It describes methods I&#8217;ve picked up over the last 3 or 4 years that work well for me. There are many other equally valid methods to use so take this tutorial as a guide. If something doesn&#8217;t work for your process change it, if there is a better way to accomplish something let me know.</p>
+</div>
+<p>Contents:</p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="local-setup.html">Local Dev Setup</a><ul>
+<li class="toctree-l2"><a class="reference external" href="local-setup.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference external" href="local-setup.html#version-and-source-control">Version and Source Control</a></li>
+<li class="toctree-l2"><a class="reference external" href="local-setup.html#postgresql-database">PostgreSQL Database</a></li>
+<li class="toctree-l2"><a class="reference external" href="local-setup.html#pip-and-virtualenv">Pip and Virtualenv</a></li>
+<li class="toctree-l2"><a class="reference external" href="local-setup.html#shortcuts-helper-scripts-and-aliases">Shortcuts, Helper scripts, and Aliases</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="project-start.html">Starting a new project</a><ul>
+<li class="toctree-l2"><a class="reference external" href="project-start.html#default-project-setup">Default project setup</a></li>
+<li class="toctree-l2"><a class="reference external" href="project-start.html#installing-requirements">Installing Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="cheat-sheet.html">Cheat Sheet</a><ul>
+<li class="toctree-l2"><a class="reference external" href="cheat-sheet.html#virtualenv-virtualenvwrapper-virtualenv-scripts">Virtualenv, Virtualenvwrapper, Virtualenv scripts</a></li>
+<li class="toctree-l2"><a class="reference external" href="cheat-sheet.html#git">Git</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="learning-resources.html">Additional Resources</a><ul>
+<li class="toctree-l2"><a class="reference external" href="learning-resources.html#python">Python</a></li>
+<li class="toctree-l2"><a class="reference external" href="learning-resources.html#django">Django</a></li>
+<li class="toctree-l2"><a class="reference external" href="learning-resources.html#django-helper-apps">Django Helper Apps</a></li>
+<li class="toctree-l2"><a class="reference external" href="learning-resources.html#pip-and-virtualenv">Pip and VirtualEnv</a></li>
+<li class="toctree-l2"><a class="reference external" href="learning-resources.html#fabric">Fabric</a></li>
+<li class="toctree-l2"><a class="reference external" href="learning-resources.html#command-line-usage">Command line usage</a></li>
+<li class="toctree-l2"><a class="reference external" href="learning-resources.html#git">Git</a></li>
+<li class="toctree-l2"><a class="reference external" href="learning-resources.html#subversion">Subversion</a></li>
+<li class="toctree-l2"><a class="reference external" href="learning-resources.html#mercurial">Mercurial</a></li>
+</ul>
+</li>
+</ul>
+<p>TODO</p>
+<ul class="simple">
+<li>Output of workon command in the virtualenv install</li>
+<li>Create the docs folder</li>
+<li>Refactor the config files to use fabric templates</li>
+</ul>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference external" href="modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference external" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="#">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Tutorial for Setting up a Complete Django Project</a><ul>
+</ul>
+</li>
+<li><a class="reference external" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            <h4>Next topic</h4>
+            <p class="topless"><a href="local-setup.html"
+                                  title="next chapter">Local Dev Setup</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/index.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="local-setup.html" title="Local Dev Setup"
+             >next</a> |</li>
+        <li><a href="#">Django Project Setup v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, James Punteney.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>

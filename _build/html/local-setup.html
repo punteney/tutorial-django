@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Local Dev Setup &mdash; Django Project Setup v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Project Setup v0.1 documentation" href="index.html" />
+    <link rel="next" title="Starting a new project" href="project-start.html" />
+    <link rel="prev" title="Tutorial for Setting up a Complete Django Project" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="project-start.html" title="Starting a new project"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Tutorial for Setting up a Complete Django Project"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Project Setup v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="local-dev-setup">
+<h1>Local Dev Setup<a class="headerlink" href="#local-dev-setup" title="Permalink to this headline">¶</a></h1>
+<p>For my local development environment I use a Mac with OS X 10.6, the requirements and setup will be based on that.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>It&#8217;s assumed that you already have these items installed:</p>
+<div class="section" id="python">
+<h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://python.org">Python</a> 2.4 or higher, which is installed on OS X by default. To verify go to the terminal and on the command line type <tt class="docutils literal"><span class="pre">python</span></tt> to enter the python interactive shell. You should see output along these lines (The first line tells you what version is installed, in this case Python 2.5.4):</p>
+<p>Python 2.5.4 (r254:67916, Jul  7 2009, 23:51:24)
+[GCC 4.2.1 (Apple Inc. build 5646)] on darwin
+Type &#8220;help&#8221;, &#8220;copyright&#8221;, &#8220;credits&#8221; or &#8220;license&#8221; for more information.
+&gt;&gt;&gt;</p>
+<p>The first line tells you what python version is installed, in this case Python 2.5.4. To exit out of the interactive shell type <tt class="docutils literal"><span class="pre">ctrl</span> <span class="pre">d</span></tt></p>
+</div>
+<div class="section" id="text-editor-or-ide">
+<h3>Text Editor or IDE<a class="headerlink" href="#text-editor-or-ide" title="Permalink to this headline">¶</a></h3>
+<p>There are many text editors and IDE&#8217;s that can be used for Python and Django. I use <a class="reference external" href="http://macromates.com/">Textmate</a> but any editor that you are comfortable with should work.</p>
+</div>
+</div>
+<div class="section" id="version-and-source-control">
+<h2>Version and Source Control<a class="headerlink" href="#version-and-source-control" title="Permalink to this headline">¶</a></h2>
+<p>Version control will be done using <a class="reference external" href="http://git-scm.com/">git</a> on <a class="reference external" href="http://github.com">github</a>.</p>
+<p>First signup for a <a class="reference external" href="http://github.com">github</a> account if you don&#8217;t have one already.  Once you have the github account follow their <a class="reference external" href="http://help.github.com/git-installation-redirect">instructions</a> unless you have a specific reason not to I&#8217;d recommend using the Pre-compiled installer for OS X as that is the easiest install method.</p>
+<div class="admonition-other-version-control-systems admonition ">
+<p class="first admonition-title">Other Version Control Systems</p>
+<p>There are many other version control systems out there. The two most common that you will run into while doing Django and Python work are:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://subversion.tigris.org/">Subversion</a> which is what the Django project uses for source control.</li>
+<li><a class="reference external" href="http://mercurial.selenic.com/">Mercurial</a> (sometimes referred to as &#8220;hg&#8221;) a distributed version control system written in Python.</li>
+</ul>
+<p class="last">Neither Subversion or Mercurial are needed for this tutorial at somepoint you will probably need to install and interact with them.</p>
+</div>
+</div>
+<div class="section" id="postgresql-database">
+<h2>PostgreSQL Database<a class="headerlink" href="#postgresql-database" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.postgresql.org/">PostgreSQL</a> will be the database for the project. An <a class="reference external" href="http://www.postgresql.org/download/macosx">OS X binary install file is available</a>, install it with the default options. As part of the installation <a class="reference external" href="http://www.pgadmin.org/">pgAdmin</a> is installed, this is a nice gui application that will be used for managing the postgres databases.</p>
+<div class="admonition-other-database-system admonition ">
+<p class="first admonition-title">Other Database System</p>
+<p class="last">Django is fairly agnostic about the database system it uses, so other databases than Postgres can be used. Many develop locally with <cite>sqlite &lt;http://www.sqlite.org/&gt;</cite> for it&#8217;s ease of setup and then use PostgreSQL, MySQL, Oracle, etc. for production purposes. I use Postgres for development to minimize the differences between the production and dev environment to hopefully find any database specific issues earlier in the process.</p>
+</div>
+</div>
+<div class="section" id="pip-and-virtualenv">
+<h2>Pip and Virtualenv<a class="headerlink" href="#pip-and-virtualenv" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://pip.openplans.org/">Pip</a> is great for installing python packages and works well with virtualenv for localized package installations. To install pip run the following from the command line.:</p>
+<div class="highlight-python"><pre>sudo easy_install pip</pre>
+</div>
+<p><a class="reference external" href="http://pypi.python.org/pypi/virtualenv">Virtualenv</a> is a tool to create isolated Python environments. This is used to isolate different projects from each other. For example say one project requires Django 1.0 and another requires Django 1.1 virtualenv makes it easy to seperate those projects so one can use Django 1.0 and the other can use Django 1.1 without any need for messing with the python path (trust me it makes life much easier). To install virtualenv run:</p>
+<div class="highlight-python"><pre>sudo pip install virtualenv</pre>
+</div>
+<p><a class="reference external" href="http://www.doughellmann.com/projects/virtualenvwrapper/">Virtualenvwrapper</a> is  helper app that make it easier to use virtualenv. To install virtualenvwrapper run the following commands:</p>
+<div class="highlight-python"><pre>sudo pip install virtualenvwrapper
+echo "export WORKON_HOME=$HOME/.virtualenvs" ~/.bashrc
+echo "source /usr/local/bin/virtualenvwrapper_bashrc" ~/.bashrc
+source ~/.bashrc</pre>
+</div>
+<p>To verify it is installed from the run <tt class="docutils literal"><span class="pre">workon</span></tt> from the commandline <strong>TODO PUT THE OUTPUT OF WORKON HERE</strong></p>
+</div>
+<div class="section" id="shortcuts-helper-scripts-and-aliases">
+<h2>Shortcuts, Helper scripts, and Aliases<a class="headerlink" href="#shortcuts-helper-scripts-and-aliases" title="Permalink to this headline">¶</a></h2>
+<p>Items to minimize repetitive tasks and keystrokes.</p>
+<div class="section" id="project-location">
+<h3>Project location<a class="headerlink" href="#project-location" title="Permalink to this headline">¶</a></h3>
+<p>Keeping all your projects in the same location allows for easier automation as an assumption can be made as to the location of the projects. For this tutorial we&#8217;ll use a &#8220;projects&#8221; folder created within your home directory. To create the folder run the following:</p>
+<div class="highlight-python"><pre>mkdir ~\projects</pre>
+</div>
+</div>
+<div class="section" id="aliases">
+<h3>Aliases<a class="headerlink" href="#aliases" title="Permalink to this headline">¶</a></h3>
+<p>Using aliases common commands can be shortened to save some typing and speed up the process. It will be assumed that you have these aliases created for use in this tutorial.</p>
+<div class="section" id="git-aliases">
+<h4>Git Aliases<a class="headerlink" href="#git-aliases" title="Permalink to this headline">¶</a></h4>
+<p>In general git commands take the format of <tt class="docutils literal"><span class="pre">git</span> <span class="pre">push</span></tt> and <tt class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></tt> etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the bottom of the ~/.bashrc file add these lines:</p>
+<div class="highlight-python"><pre>alias gcm="git commit"
+alias gpl="git pull"
+alias gps="git push"
+alias gpsa="git push --all"
+alias ga="git add"
+alias gst="git status"
+alias gdf="git diff"
+alias gdiff="git diff"</pre>
+</div>
+<p>With these aliases now instead of typing out <tt class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></tt> or <tt class="docutils literal"><span class="pre">git</span> <span class="pre">add</span></tt> you just type <tt class="docutils literal"><span class="pre">gcm</span></tt> or <tt class="docutils literal"><span class="pre">ga</span></tt> respectively. It&#8217;s a small difference but feels much quicker.</p>
+</div>
+</div>
+<div class="section" id="helper-scripts">
+<h3>Helper Scripts<a class="headerlink" href="#helper-scripts" title="Permalink to this headline">¶</a></h3>
+<p>The virtualenv wrapper provides a lot of helpful functionality for working with virtualenvs, one of the items it provides is the ability to easily hook in scripts that run at specific points in the virtualenv lifecycle. I&#8217;ve created some quick scripts using these hooks that will do a couple of things;</p>
+<ul class="simple">
+<li>When a new virtual environment is created a directory with a matching name will be created in the projects folder (if it doesn&#8217;t exist already).</li>
+<li>When a virtual environment is activated it will automatically change to it&#8217;s corresponding project directory and it will add the project bin folder on to the path environment variable.</li>
+</ul>
+<p>To install the scripts:</p>
+<div class="highlight-python"><pre>cd ~/projects/
+git clone git://github.com/punteney/virtualenv-scripts.git
+virtualenv-scripts/install.sh</pre>
+</div>
+<p>&#8220;git clone&#8221; makes a local copy of the repository in the folder ~/projects/virtualenv-scripts.&#8221;virtualenv-scripts/install.sh&#8221; script creates symbolic links to the scripts in ~/projects/virtualenv-scripts/global_scripts in the ~/.virtualenvs folder. In the future if new updates are made to the scripts all you need to do to get the updates is:</p>
+<div class="highlight-python"><pre>cd ~/projects/virtualenv-scripts
+gpl</pre>
+</div>
+<p>Where &#8220;gpl&#8221; is the aliases we created above for &#8220;git pull&#8221;.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Local Dev Setup</a><ul>
+<li><a class="reference external" href="#prerequisites">Prerequisites</a><ul>
+<li><a class="reference external" href="#python">Python</a></li>
+<li><a class="reference external" href="#text-editor-or-ide">Text Editor or IDE</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#version-and-source-control">Version and Source Control</a></li>
+<li><a class="reference external" href="#postgresql-database">PostgreSQL Database</a></li>
+<li><a class="reference external" href="#pip-and-virtualenv">Pip and Virtualenv</a></li>
+<li><a class="reference external" href="#shortcuts-helper-scripts-and-aliases">Shortcuts, Helper scripts, and Aliases</a><ul>
+<li><a class="reference external" href="#project-location">Project location</a></li>
+<li><a class="reference external" href="#aliases">Aliases</a><ul>
+<li><a class="reference external" href="#git-aliases">Git Aliases</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#helper-scripts">Helper Scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">Tutorial for Setting up a Complete Django Project</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="project-start.html"
+                                  title="next chapter">Starting a new project</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/local-setup.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="project-start.html" title="Starting a new project"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Tutorial for Setting up a Complete Django Project"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Project Setup v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, James Punteney.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>

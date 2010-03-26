@@ -1,0 +1,23 @@
+Downloading/unpacking sphinx
+  Getting page http://pypi.python.org/simple/sphinx
+  URLs to search for versions for sphinx:
+  * http://pypi.python.org/simple/sphinx/
+  Getting page http://pypi.python.org/simple/sphinx/
+  Getting page http://sphinx.pocoo.org/
+Exception:
+Traceback (most recent call last):
+  File "/Users/james/.virtualenvs/setup_doc/lib/python2.5/site-packages/pip-0.6.1-py2.5.egg/pip.py", line 482, in main
+    self.run(options, args)
+  File "/Users/james/.virtualenvs/setup_doc/lib/python2.5/site-packages/pip-0.6.1-py2.5.egg/pip.py", line 675, in run
+    requirement_set.install_files(finder, force_root_egg_info=self.bundle)
+  File "/Users/james/.virtualenvs/setup_doc/lib/python2.5/site-packages/pip-0.6.1-py2.5.egg/pip.py", line 2422, in install_files
+    url = finder.find_requirement(req_to_install, upgrade=self.upgrade)
+  File "/Users/james/.virtualenvs/setup_doc/lib/python2.5/site-packages/pip-0.6.1-py2.5.egg/pip.py", line 1470, in find_requirement
+    for page in self._get_pages(locations, req):
+  File "/Users/james/.virtualenvs/setup_doc/lib/python2.5/site-packages/pip-0.6.1-py2.5.egg/pip.py", line 1560, in _get_pages
+    t.join()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.5/lib/python2.5/threading.py", line 594, in join
+    self.__block.wait()
+  File "/System/Library/Frameworks/Python.framework/Versions/2.5/lib/python2.5/threading.py", line 216, in wait
+    waiter.acquire()
+KeyboardInterrupt

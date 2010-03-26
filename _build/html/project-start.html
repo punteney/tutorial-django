@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Starting a new project &mdash; Django Project Setup v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Django Project Setup v0.1 documentation" href="index.html" />
+    <link rel="next" title="Cheat Sheet" href="cheat-sheet.html" />
+    <link rel="prev" title="Local Dev Setup" href="local-setup.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="cheat-sheet.html" title="Cheat Sheet"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="local-setup.html" title="Local Dev Setup"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Django Project Setup v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="starting-a-new-project">
+<h1>Starting a new project<a class="headerlink" href="#starting-a-new-project" title="Permalink to this headline">¶</a></h1>
+<p>Each new project starts out with the same structure, and base apps installed. Instead of manually creating the project structure and requirements every time I do a new project I&#8217;ve created a base default project on github to use a starting point.</p>
+<p>For this tutorial we&#8217;ll be setting up a very simple zoo site, the project name will be <strong>zoo</strong>.</p>
+<div class="section" id="default-project-setup">
+<h2>Default project setup<a class="headerlink" href="#default-project-setup" title="Permalink to this headline">¶</a></h2>
+<p>First step is create the virtualenv for this the zoo project from the terminal type:</p>
+<div class="highlight-python"><pre>mkvirtualenv --no-site-packages zoo</pre>
+</div>
+<p>This will create a new virtualenv called &#8220;zoo&#8221; a &#8220;zoo&#8221; folder in ~/projects and activate the zoo virtualenv and changing into the ~/projects/zoo directory. The &#8220;&#8211;no-site-packages&#8221; flag sets it so that none of the globally installed python packages will be available, setting this flag is very helpful when moving the project to production. Now to work on the zoo project just type <tt class="docutils literal"><span class="pre">workon</span> <span class="pre">zoo</span></tt> and it will activate the virtualenv and put you in the ~/projects/zoo directory. When done working on the project run the <tt class="docutils literal"><span class="pre">deactivate</span> <span class="pre">zoo</span></tt> to get out of the virtualenv.</p>
+<p>Second step is to download the default project from github:</p>
+<div class="highlight-python"><pre>workon zoo
+git clone git://github.com/punteney/default_project.git
+rm -rf default_project/.git
+mv default_project zoo_site
+add2virtualenv zoo_site/apps</pre>
+</div>
+<p>The first line starts the zoo virtualenv, if not already in it. The second line copies down the base project from github for use. The third line removes the .git info as this will be a new project and should not continue to update the &#8216;default_project&#8217; on github. The fourth line renames the project from &#8220;default_project&#8221; to &#8220;zoo_site&#8221;. Finally the last line adds the zoo_site/apps directory to the python path for the virtualenv so that python modules within that directory can be called directly.</p>
+<div class="section" id="project-structure">
+<h3>Project Structure<a class="headerlink" href="#project-structure" title="Permalink to this headline">¶</a></h3>
+<p>Each project starts with the same default file structure. Later sections will explain the contents of the folders in more detail.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>~/projects/<strong>zoo</strong> - This is the top level folder all the files pertaining to this project will be kept within this folder. This folder is not kept in git for version control. Any items related to this project that won&#8217;t be kept in version control should be put in the &#8220;zoo&#8221; top level directory, generally this means anything that is auto generated from the code such as the generated documentation, or build files.</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt><strong>zoo_site</strong>/ - This is the primary project folder where all the code and configuration files are kept. This folder and all it&#8217;s files and subfolders (unless specifically excluded/ignored from git) are kept in version control.</dt>
+<dd><ul class="first last">
+<li><p class="first"><strong>project</strong>/ - This is the django project folder. It holds the settings files, urls, media, and project templates.</p>
+</li>
+<li><dl class="first docutils">
+<dt><strong>apps</strong>/ - This folder will hold any django apps or python modules used for the project that aren&#8217;t installed using pip. Often this will be apps specific to this project that aren&#8217;t meant to be reusable.</dt>
+<dd><ul class="first last simple">
+<li><strong>utils</strong>/ - Holds various one off items and helpers for the project that aren&#8217;t big enough to be their own apps or modules.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>config</strong>/ - Holds various config files for things like Apache, nginx, wsgi, memcache, etc.</p>
+</li>
+<li><p class="first"><strong>deploy</strong>/ - This folder holds the fabric file and requirements files along with any other items used in the deployment process.</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><strong>docs</strong>/ - This folder is empty initially but is there to hold the generated documents for the project.</p>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="installing-requirements">
+<h2>Installing Requirements<a class="headerlink" href="#installing-requirements" title="Permalink to this headline">¶</a></h2>
+<p>There are two requirements files in the deploy folder. These are <a class="reference external" href="http://pip.openplans.org/#requirements-files">pip requirements files</a> containing the required modules.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>requirements_all.txt - are required python modules that should be installed on all systems that this project is installed on (dev, staging, production). It contains the following items:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="http://www.djangoproject.com/">Django</a> - The latest released version of Django</li>
+<li><a class="reference external" href="http://ipython.scipy.org/moin/">ipython</a> - An enhanced interactive python shell</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/python-memcached">python-memcached</a> - A fully python memcache client</li>
+<li><a class="reference external" href="http://south.aeracode.org/">south</a> - Database migrations for django.</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>requirements_dev.txt - are requirements only needed on the dev server. Most of the items in this file are items to make debugging and testing easier which aren&#8217;t needed on the production servers.</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="http://initd.org/psycopg/">psycopg2</a> - A database drive for PostgreSQL. On prodution the driver installed through the OS packages is used, so it&#8217;s not needed on them.</li>
+<li><a class="reference external" href="http://github.com/robhudson/django-debug-toolbar">django-debug-toolbar</a> - A huge help for debugging and optimizing a django site.</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/Werkzeug/">werkseug</a> - A debugger that that supports interactive debugging on the error pages.</li>
+<li><a class="reference external" href="http://pypi.python.org/pypi/django-extensions/">django-extensions</a> - Various helpful command extensions to django.</li>
+<li><a class="reference external" href="http://fabfile.org">fabric</a> - Used for deploying the site to remove users.</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="config-files">
+<h3>Config Files<a class="headerlink" href="#config-files" title="Permalink to this headline">¶</a></h3>
+<p>TODO refactor the config files to use fabric templates and describe here</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Starting a new project</a><ul>
+<li><a class="reference external" href="#default-project-setup">Default project setup</a><ul>
+<li><a class="reference external" href="#project-structure">Project Structure</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#installing-requirements">Installing Requirements</a><ul>
+<li><a class="reference external" href="#config-files">Config Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="local-setup.html"
+                                  title="previous chapter">Local Dev Setup</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="cheat-sheet.html"
+                                  title="next chapter">Cheat Sheet</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/project-start.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="cheat-sheet.html" title="Cheat Sheet"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="local-setup.html" title="Local Dev Setup"
+             >previous</a> |</li>
+        <li><a href="index.html">Django Project Setup v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, James Punteney.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>
