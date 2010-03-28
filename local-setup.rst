@@ -8,14 +8,14 @@ It's assumed that you already have these items installed:
 
 Python
 ^^^^^^^^^^^^^^^
-`Python <http://python.org>`_ 2.4 or higher, which is installed on OS X by default. To verify go to the terminal and on the command line type ``python`` to enter the python interactive shell. You should see output along these lines (The first line tells you what version is installed, in this case Python 2.5.4)::
+`Python <http://python.org>`_ 2.4 or higher, which is installed on OS X by default. To verify go to the terminal and on the command line type ``python`` to enter the python interactive shell. You should see output along these lines::
 
-Python 2.5.4 (r254:67916, Jul  7 2009, 23:51:24) 
-[GCC 4.2.1 (Apple Inc. build 5646)] on darwin
-Type "help", "copyright", "credits" or "license" for more information.
->>> 
+    Python 2.5.4 (r254:67916, Jul  7 2009, 23:51:24) 
+    [GCC 4.2.1 (Apple Inc. build 5646)] on darwin
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> 
 
-The first line tells you what python version is installed, in this case Python 2.5.4. To exit out of the interactive shell type ``ctrl d``
+The first line tells you what python version is installed, in this case Python 2.5.4. To exit out of the interactive shell hit ``ctrl d``
 
 Text Editor or IDE
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -44,7 +44,7 @@ PostgreSQL Database
 --------------------------
 `PostgreSQL <http://www.postgresql.org/>`_ will be the database for the project. An `OS X binary install file is available <http://www.postgresql.org/download/macosx>`_, install it with the default options. 
 
-Once the installation has finished edit the '/Library/PostgreSQL/8.4/data/pg_hba.conf' file (you'll need to do this using 'sudo' to have the rights to edit the file). Scroll down towards the bottom of the file until you see these lines::
+Once the installation has finished edit the '/Library/PostgreSQL/8.4/data/pg_hba.conf' file (you'll need to do this using 'sudo' to have the rights to edit the file ``sudo nano /Library/PostgreSQL/8.4/data/pg_hba.conf``). Scroll down towards the bottom of the file until you see these lines::
 
     # "local" is for Unix domain socket connections only
     local   all         all                               md5
@@ -84,8 +84,8 @@ Pip and Virtualenv
 `Virtualenvwrapper <http://www.doughellmann.com/projects/virtualenvwrapper/>`_ is  helper app that make it easier to use virtualenv. To install virtualenvwrapper run the following commands::
 
     sudo pip install virtualenvwrapper
-    echo "export WORKON_HOME=$HOME/.virtualenvs" ~/.bashrc
-    echo "source /usr/local/bin/virtualenvwrapper_bashrc" ~/.bashrc
+    echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bashrc
+    echo "source /usr/local/bin/virtualenvwrapper_bashrc" >> ~/.bashrc
     source ~/.bashrc
 
 To verify it is installed from the run ``workon`` from the command line.
@@ -102,7 +102,7 @@ Keeping all your projects in the same location allows for easier automation as a
 
 Git Shortcuts
 ^^^^^^^^^^^^^^^^^^^^^^^^
-In general git commands take the format of ``git push`` and ``git commit`` etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the bottom of the ~/.bashrc file add these lines::
+In general git commands take the format of ``git push`` and ``git commit`` etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the following to the bottom of the ~/.bashrc file::
 
     alias gcm="git commit"
     alias gpl="git pull"
@@ -115,7 +115,7 @@ In general git commands take the format of ``git push`` and ``git commit`` etc. 
 
 With these aliases now instead of typing out ``git commit`` or ``git add`` you just type ``gcm`` or ``ga`` respectively. It's a small difference but they are commands that are typed often.
 
-While not an alias, setting git to ignore some file types by default is definitely helpful. To ignore .pyc and .DS_Store files for all repositories run the following commands::
+Setting git to ignore some file types by default helps keeps the repositories clean. To ignore .pyc and .DS_Store files for all your repositories on the local system run the following commands::
 
     echo "*.DS_Store" >> ~/.gitignore
     echo "*.py[c|o]" >> ~/.gitignore
@@ -134,7 +134,7 @@ To install the scripts::
     git clone git://github.com/punteney/virtualenv-scripts.git
     virtualenv-scripts/install.sh
 
-"git clone" makes a local copy of the repository in the folder ~/projects/virtualenv-scripts."virtualenv-scripts/install.sh" script creates symbolic links to the scripts in ~/projects/virtualenv-scripts/global_scripts in the ~/.virtualenvs folder. In the future if new updates are made to the scripts all you need to do to get the updates is::
+"git clone" makes a local copy of the repository in the folder ~/projects/virtualenv-scripts. The "virtualenv-scripts/install.sh" script creates symbolic links to all the scripts in ~/projects/virtualenv-scripts/global_scripts in the ~/.virtualenvs folder. In the future if new updates are made to the scripts all you need to do to get the updates is::
 
     cd ~/projects/virtualenv-scripts
     gpl origin master

@@ -53,12 +53,13 @@
 <p>It&#8217;s assumed that you already have these items installed:</p>
 <div class="section" id="python">
 <h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="http://python.org">Python</a> 2.4 or higher, which is installed on OS X by default. To verify go to the terminal and on the command line type <tt class="docutils literal"><span class="pre">python</span></tt> to enter the python interactive shell. You should see output along these lines (The first line tells you what version is installed, in this case Python 2.5.4):</p>
-<p>Python 2.5.4 (r254:67916, Jul  7 2009, 23:51:24)
+<p><a class="reference external" href="http://python.org">Python</a> 2.4 or higher, which is installed on OS X by default. To verify go to the terminal and on the command line type <tt class="docutils literal"><span class="pre">python</span></tt> to enter the python interactive shell. You should see output along these lines:</p>
+<div class="highlight-python"><pre>Python 2.5.4 (r254:67916, Jul  7 2009, 23:51:24)
 [GCC 4.2.1 (Apple Inc. build 5646)] on darwin
-Type &#8220;help&#8221;, &#8220;copyright&#8221;, &#8220;credits&#8221; or &#8220;license&#8221; for more information.
-&gt;&gt;&gt;</p>
-<p>The first line tells you what python version is installed, in this case Python 2.5.4. To exit out of the interactive shell type <tt class="docutils literal"><span class="pre">ctrl</span> <span class="pre">d</span></tt></p>
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt;</pre>
+</div>
+<p>The first line tells you what python version is installed, in this case Python 2.5.4. To exit out of the interactive shell hit <tt class="docutils literal"><span class="pre">ctrl</span> <span class="pre">d</span></tt></p>
 </div>
 <div class="section" id="text-editor-or-ide">
 <h3>Text Editor or IDE<a class="headerlink" href="#text-editor-or-ide" title="Permalink to this headline">¶</a></h3>
@@ -87,7 +88,7 @@ Type &#8220;help&#8221;, &#8220;copyright&#8221;, &#8220;credits&#8221; or &#822
 <div class="section" id="postgresql-database">
 <h2>PostgreSQL Database<a class="headerlink" href="#postgresql-database" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://www.postgresql.org/">PostgreSQL</a> will be the database for the project. An <a class="reference external" href="http://www.postgresql.org/download/macosx">OS X binary install file is available</a>, install it with the default options.</p>
-<p>Once the installation has finished edit the &#8216;/Library/PostgreSQL/8.4/data/pg_hba.conf&#8217; file (you&#8217;ll need to do this using &#8216;sudo&#8217; to have the rights to edit the file). Scroll down towards the bottom of the file until you see these lines:</p>
+<p>Once the installation has finished edit the &#8216;/Library/PostgreSQL/8.4/data/pg_hba.conf&#8217; file (you&#8217;ll need to do this using &#8216;sudo&#8217; to have the rights to edit the file <tt class="docutils literal"><span class="pre">sudo</span> <span class="pre">nano</span> <span class="pre">/Library/PostgreSQL/8.4/data/pg_hba.conf</span></tt>). Scroll down towards the bottom of the file until you see these lines:</p>
 <div class="highlight-python"><pre># "local" is for Unix domain socket connections only
 local   all         all                               md5
 # IPv4 local connections:
@@ -120,8 +121,8 @@ host    all         all         127.0.0.1/32          trust</pre>
 </div>
 <p><a class="reference external" href="http://www.doughellmann.com/projects/virtualenvwrapper/">Virtualenvwrapper</a> is  helper app that make it easier to use virtualenv. To install virtualenvwrapper run the following commands:</p>
 <div class="highlight-python"><pre>sudo pip install virtualenvwrapper
-echo "export WORKON_HOME=$HOME/.virtualenvs" ~/.bashrc
-echo "source /usr/local/bin/virtualenvwrapper_bashrc" ~/.bashrc
+echo "export WORKON_HOME=$HOME/.virtualenvs" &gt;&gt; ~/.bashrc
+echo "source /usr/local/bin/virtualenvwrapper_bashrc" &gt;&gt; ~/.bashrc
 source ~/.bashrc</pre>
 </div>
 <p>To verify it is installed from the run <tt class="docutils literal"><span class="pre">workon</span></tt> from the command line.</p>
@@ -137,7 +138,7 @@ source ~/.bashrc</pre>
 </div>
 <div class="section" id="git-shortcuts">
 <h3>Git Shortcuts<a class="headerlink" href="#git-shortcuts" title="Permalink to this headline">¶</a></h3>
-<p>In general git commands take the format of <tt class="docutils literal"><span class="pre">git</span> <span class="pre">push</span></tt> and <tt class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></tt> etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the bottom of the ~/.bashrc file add these lines:</p>
+<p>In general git commands take the format of <tt class="docutils literal"><span class="pre">git</span> <span class="pre">push</span></tt> and <tt class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></tt> etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the following to the bottom of the ~/.bashrc file:</p>
 <div class="highlight-python"><pre>alias gcm="git commit"
 alias gpl="git pull"
 alias gps="git push"
@@ -148,7 +149,7 @@ alias gdf="git diff"
 alias gdiff="git diff"</pre>
 </div>
 <p>With these aliases now instead of typing out <tt class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></tt> or <tt class="docutils literal"><span class="pre">git</span> <span class="pre">add</span></tt> you just type <tt class="docutils literal"><span class="pre">gcm</span></tt> or <tt class="docutils literal"><span class="pre">ga</span></tt> respectively. It&#8217;s a small difference but they are commands that are typed often.</p>
-<p>While not an alias, setting git to ignore some file types by default is definitely helpful. To ignore .pyc and .DS_Store files for all repositories run the following commands:</p>
+<p>Setting git to ignore some file types by default helps keeps the repositories clean. To ignore .pyc and .DS_Store files for all your repositories on the local system run the following commands:</p>
 <div class="highlight-python"><pre>echo "*.DS_Store" &gt;&gt; ~/.gitignore
 echo "*.py[c|o]" &gt;&gt; ~/.gitignore</pre>
 </div>
@@ -165,7 +166,7 @@ echo "*.py[c|o]" &gt;&gt; ~/.gitignore</pre>
 git clone git://github.com/punteney/virtualenv-scripts.git
 virtualenv-scripts/install.sh</pre>
 </div>
-<p>&#8220;git clone&#8221; makes a local copy of the repository in the folder ~/projects/virtualenv-scripts.&#8221;virtualenv-scripts/install.sh&#8221; script creates symbolic links to the scripts in ~/projects/virtualenv-scripts/global_scripts in the ~/.virtualenvs folder. In the future if new updates are made to the scripts all you need to do to get the updates is:</p>
+<p>&#8220;git clone&#8221; makes a local copy of the repository in the folder ~/projects/virtualenv-scripts. The &#8220;virtualenv-scripts/install.sh&#8221; script creates symbolic links to all the scripts in ~/projects/virtualenv-scripts/global_scripts in the ~/.virtualenvs folder. In the future if new updates are made to the scripts all you need to do to get the updates is:</p>
 <div class="highlight-python"><pre>cd ~/projects/virtualenv-scripts
 gpl origin master</pre>
 </div>
