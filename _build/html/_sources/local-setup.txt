@@ -23,9 +23,13 @@ There are many text editors and IDE's that can be used for Python and Django. I 
 
 Version and Source Control
 ----------------------------------
-Version control will be done using `git <http://git-scm.com/>`_ on `github <http://github.com>`_.
+Version control will be done using `git <http://git-scm.com/>`_ on `github <http://github.com>`_. 
 
-First signup for a `github <http://github.com>`_ account if you don't have one already.  Once you have the github account follow their `instructions <http://help.github.com/git-installation-redirect>`_ unless you have a specific reason not to I'd recommend using the Pre-compiled installer for OS X as that is the easiest install method.
+To install git follow these steps:
+
+1. Signup for a `github <http://github.com>`_ account if you don't have one already.  
+2. Follow github's `instructions <http://help.github.com/git-installation-redirect>`_ for installing git. Unless you have a specific reason not to I'd recommend using the pre-compiled installer for OS X as that is the easiest install method. 
+3. Once git is is installed follow the github instructions for `generating SSH keys <http://help.github.com/mac-key-setup/>`_
 
 .. admonition:: Other Version Control Systems
 
@@ -34,11 +38,33 @@ First signup for a `github <http://github.com>`_ account if you don't have one a
     * `Subversion <http://subversion.tigris.org/>`_ which is what the Django project uses for source control.
     * `Mercurial <http://mercurial.selenic.com/>`_ (sometimes referred to as "hg") a distributed version control system written in Python.
     
-    Neither Subversion or Mercurial are needed for this tutorial at somepoint you will probably need to install and interact with them.
+    Neither Subversion or Mercurial are needed for this tutorial, but at somepoint you will probably need to install and interact with them.
 
 PostgreSQL Database
 --------------------------
-`PostgreSQL <http://www.postgresql.org/>`_ will be the database for the project. An `OS X binary install file is available <http://www.postgresql.org/download/macosx>`_, install it with the default options. As part of the installation `pgAdmin <http://www.pgadmin.org/>`_ is installed, this is a nice gui application that will be used for managing the postgres databases.
+`PostgreSQL <http://www.postgresql.org/>`_ will be the database for the project. An `OS X binary install file is available <http://www.postgresql.org/download/macosx>`_, install it with the default options. 
+
+Once the installation has finished edit the '/Library/PostgreSQL/8.4/data/pg_hba.conf' file (you'll need to do this using 'sudo' to have the rights to edit the file). Scroll down towards the bottom of the file until you see these lines::
+
+    # "local" is for Unix domain socket connections only
+    local   all         all                               md5
+    # IPv4 local connections:
+    host    all         all         127.0.0.1/32          md5
+
+Change those line so instead of requiring md5 passwords they are trusted connections::
+
+    # "local" is for Unix domain socket connections only
+    local   all         all                               trust
+    # IPv4 local connections:
+    host    all         all         127.0.0.1/32          trust
+
+Once that file is changed start the PostGres Server. This can be done through the "start server.app" in the "Postgres 8.4" folder in the "Applications" folder.
+
+.. admonition:: Database Security
+
+    As this database is just a dev database running locally it's setup without a password allowing anyone with access to the local system to access the database. In most cases this level of security is fine, if more security is needed adjust the pg_hba.conf file to suit the security needs.
+
+As part of the installation `pgAdmin3 <http://www.pgadmin.org/>`_ is installed, this is a gui application that is helpful for managing the postgres databases.
 
 .. admonition:: Other Database System
 
@@ -62,7 +88,7 @@ Pip and Virtualenv
     echo "source /usr/local/bin/virtualenvwrapper_bashrc" ~/.bashrc
     source ~/.bashrc
 
-To verify it is installed from the run ``workon`` from the commandline **TODO PUT THE OUTPUT OF WORKON HERE**
+To verify it is installed from the run ``workon`` from the command line.
 
 Shortcuts, Helper scripts, and Aliases
 -----------------------------------------------
@@ -72,14 +98,10 @@ Project location
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Keeping all your projects in the same location allows for easier automation as an assumption can be made as to the location of the projects. For this tutorial we'll use a "projects" folder created within your home directory. To create the folder run the following:: 
 
-    mkdir ~\projects
+    mkdir ~/projects
 
-Aliases
-^^^^^^^^^^^^^^^^^^^^^
-Using aliases common commands can be shortened to save some typing and speed up the process. It will be assumed that you have these aliases created for use in this tutorial.
-
-Git Aliases
-""""""""""""""""""""
+Git Shortcuts
+^^^^^^^^^^^^^^^^^^^^^^^^
 In general git commands take the format of ``git push`` and ``git commit`` etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the bottom of the ~/.bashrc file add these lines::
 
     alias gcm="git commit"
@@ -91,7 +113,13 @@ In general git commands take the format of ``git push`` and ``git commit`` etc. 
     alias gdf="git diff"
     alias gdiff="git diff"
 
-With these aliases now instead of typing out ``git commit`` or ``git add`` you just type ``gcm`` or ``ga`` respectively. It's a small difference but feels much quicker.
+With these aliases now instead of typing out ``git commit`` or ``git add`` you just type ``gcm`` or ``ga`` respectively. It's a small difference but they are commands that are typed often.
+
+While not an alias, setting git to ignore some file types by default is definitely helpful. To ignore .pyc and .DS_Store files for all repositories run the following commands::
+
+    echo "*.DS_Store" >> ~/.gitignore
+    echo "*.py[c|o]" >> ~/.gitignore
+
 
 Helper Scripts
 ^^^^^^^^^^^^^^^^^^^^^
@@ -109,7 +137,7 @@ To install the scripts::
 "git clone" makes a local copy of the repository in the folder ~/projects/virtualenv-scripts."virtualenv-scripts/install.sh" script creates symbolic links to the scripts in ~/projects/virtualenv-scripts/global_scripts in the ~/.virtualenvs folder. In the future if new updates are made to the scripts all you need to do to get the updates is::
 
     cd ~/projects/virtualenv-scripts
-    gpl
+    gpl origin master
 
 Where "gpl" is the aliases we created above for "git pull".
 

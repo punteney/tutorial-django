@@ -68,7 +68,12 @@ Type &#8220;help&#8221;, &#8220;copyright&#8221;, &#8220;credits&#8221; or &#822
 <div class="section" id="version-and-source-control">
 <h2>Version and Source Control<a class="headerlink" href="#version-and-source-control" title="Permalink to this headline">¶</a></h2>
 <p>Version control will be done using <a class="reference external" href="http://git-scm.com/">git</a> on <a class="reference external" href="http://github.com">github</a>.</p>
-<p>First signup for a <a class="reference external" href="http://github.com">github</a> account if you don&#8217;t have one already.  Once you have the github account follow their <a class="reference external" href="http://help.github.com/git-installation-redirect">instructions</a> unless you have a specific reason not to I&#8217;d recommend using the Pre-compiled installer for OS X as that is the easiest install method.</p>
+<p>To install git follow these steps:</p>
+<ol class="arabic simple">
+<li>Signup for a <a class="reference external" href="http://github.com">github</a> account if you don&#8217;t have one already.</li>
+<li>Follow github&#8217;s <a class="reference external" href="http://help.github.com/git-installation-redirect">instructions</a> for installing git. Unless you have a specific reason not to I&#8217;d recommend using the pre-compiled installer for OS X as that is the easiest install method.</li>
+<li>Once git is is installed follow the github instructions for <a class="reference external" href="http://help.github.com/mac-key-setup/">generating SSH keys</a></li>
+</ol>
 <div class="admonition-other-version-control-systems admonition ">
 <p class="first admonition-title">Other Version Control Systems</p>
 <p>There are many other version control systems out there. The two most common that you will run into while doing Django and Python work are:</p>
@@ -76,12 +81,30 @@ Type &#8220;help&#8221;, &#8220;copyright&#8221;, &#8220;credits&#8221; or &#822
 <li><a class="reference external" href="http://subversion.tigris.org/">Subversion</a> which is what the Django project uses for source control.</li>
 <li><a class="reference external" href="http://mercurial.selenic.com/">Mercurial</a> (sometimes referred to as &#8220;hg&#8221;) a distributed version control system written in Python.</li>
 </ul>
-<p class="last">Neither Subversion or Mercurial are needed for this tutorial at somepoint you will probably need to install and interact with them.</p>
+<p class="last">Neither Subversion or Mercurial are needed for this tutorial, but at somepoint you will probably need to install and interact with them.</p>
 </div>
 </div>
 <div class="section" id="postgresql-database">
 <h2>PostgreSQL Database<a class="headerlink" href="#postgresql-database" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="http://www.postgresql.org/">PostgreSQL</a> will be the database for the project. An <a class="reference external" href="http://www.postgresql.org/download/macosx">OS X binary install file is available</a>, install it with the default options. As part of the installation <a class="reference external" href="http://www.pgadmin.org/">pgAdmin</a> is installed, this is a nice gui application that will be used for managing the postgres databases.</p>
+<p><a class="reference external" href="http://www.postgresql.org/">PostgreSQL</a> will be the database for the project. An <a class="reference external" href="http://www.postgresql.org/download/macosx">OS X binary install file is available</a>, install it with the default options.</p>
+<p>Once the installation has finished edit the &#8216;/Library/PostgreSQL/8.4/data/pg_hba.conf&#8217; file (you&#8217;ll need to do this using &#8216;sudo&#8217; to have the rights to edit the file). Scroll down towards the bottom of the file until you see these lines:</p>
+<div class="highlight-python"><pre># "local" is for Unix domain socket connections only
+local   all         all                               md5
+# IPv4 local connections:
+host    all         all         127.0.0.1/32          md5</pre>
+</div>
+<p>Change those line so instead of requiring md5 passwords they are trusted connections:</p>
+<div class="highlight-python"><pre># "local" is for Unix domain socket connections only
+local   all         all                               trust
+# IPv4 local connections:
+host    all         all         127.0.0.1/32          trust</pre>
+</div>
+<p>Once that file is changed start the PostGres Server. This can be done through the &#8220;start server.app&#8221; in the &#8220;Postgres 8.4&#8221; folder in the &#8220;Applications&#8221; folder.</p>
+<div class="admonition-database-security admonition ">
+<p class="first admonition-title">Database Security</p>
+<p class="last">As this database is just a dev database running locally it&#8217;s setup without a password allowing anyone with access to the local system to access the database. In most cases this level of security is fine, if more security is needed adjust the pg_hba.conf file to suit the security needs.</p>
+</div>
+<p>As part of the installation <a class="reference external" href="http://www.pgadmin.org/">pgAdmin3</a> is installed, this is a gui application that is helpful for managing the postgres databases.</p>
 <div class="admonition-other-database-system admonition ">
 <p class="first admonition-title">Other Database System</p>
 <p class="last">Django is fairly agnostic about the database system it uses, so other databases than Postgres can be used. Many develop locally with <cite>sqlite &lt;http://www.sqlite.org/&gt;</cite> for it&#8217;s ease of setup and then use PostgreSQL, MySQL, Oracle, etc. for production purposes. I use Postgres for development to minimize the differences between the production and dev environment to hopefully find any database specific issues earlier in the process.</p>
@@ -101,7 +124,7 @@ echo "export WORKON_HOME=$HOME/.virtualenvs" ~/.bashrc
 echo "source /usr/local/bin/virtualenvwrapper_bashrc" ~/.bashrc
 source ~/.bashrc</pre>
 </div>
-<p>To verify it is installed from the run <tt class="docutils literal"><span class="pre">workon</span></tt> from the commandline <strong>TODO PUT THE OUTPUT OF WORKON HERE</strong></p>
+<p>To verify it is installed from the run <tt class="docutils literal"><span class="pre">workon</span></tt> from the command line.</p>
 </div>
 <div class="section" id="shortcuts-helper-scripts-and-aliases">
 <h2>Shortcuts, Helper scripts, and Aliases<a class="headerlink" href="#shortcuts-helper-scripts-and-aliases" title="Permalink to this headline">¶</a></h2>
@@ -109,14 +132,11 @@ source ~/.bashrc</pre>
 <div class="section" id="project-location">
 <h3>Project location<a class="headerlink" href="#project-location" title="Permalink to this headline">¶</a></h3>
 <p>Keeping all your projects in the same location allows for easier automation as an assumption can be made as to the location of the projects. For this tutorial we&#8217;ll use a &#8220;projects&#8221; folder created within your home directory. To create the folder run the following:</p>
-<div class="highlight-python"><pre>mkdir ~\projects</pre>
+<div class="highlight-python"><pre>mkdir ~/projects</pre>
 </div>
 </div>
-<div class="section" id="aliases">
-<h3>Aliases<a class="headerlink" href="#aliases" title="Permalink to this headline">¶</a></h3>
-<p>Using aliases common commands can be shortened to save some typing and speed up the process. It will be assumed that you have these aliases created for use in this tutorial.</p>
-<div class="section" id="git-aliases">
-<h4>Git Aliases<a class="headerlink" href="#git-aliases" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="git-shortcuts">
+<h3>Git Shortcuts<a class="headerlink" href="#git-shortcuts" title="Permalink to this headline">¶</a></h3>
 <p>In general git commands take the format of <tt class="docutils literal"><span class="pre">git</span> <span class="pre">push</span></tt> and <tt class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></tt> etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the bottom of the ~/.bashrc file add these lines:</p>
 <div class="highlight-python"><pre>alias gcm="git commit"
 alias gpl="git pull"
@@ -127,7 +147,10 @@ alias gst="git status"
 alias gdf="git diff"
 alias gdiff="git diff"</pre>
 </div>
-<p>With these aliases now instead of typing out <tt class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></tt> or <tt class="docutils literal"><span class="pre">git</span> <span class="pre">add</span></tt> you just type <tt class="docutils literal"><span class="pre">gcm</span></tt> or <tt class="docutils literal"><span class="pre">ga</span></tt> respectively. It&#8217;s a small difference but feels much quicker.</p>
+<p>With these aliases now instead of typing out <tt class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></tt> or <tt class="docutils literal"><span class="pre">git</span> <span class="pre">add</span></tt> you just type <tt class="docutils literal"><span class="pre">gcm</span></tt> or <tt class="docutils literal"><span class="pre">ga</span></tt> respectively. It&#8217;s a small difference but they are commands that are typed often.</p>
+<p>While not an alias, setting git to ignore some file types by default is definitely helpful. To ignore .pyc and .DS_Store files for all repositories run the following commands:</p>
+<div class="highlight-python"><pre>echo "*.DS_Store" &gt;&gt; ~/.gitignore
+echo "*.py[c|o]" &gt;&gt; ~/.gitignore</pre>
 </div>
 </div>
 <div class="section" id="helper-scripts">
@@ -144,7 +167,7 @@ virtualenv-scripts/install.sh</pre>
 </div>
 <p>&#8220;git clone&#8221; makes a local copy of the repository in the folder ~/projects/virtualenv-scripts.&#8221;virtualenv-scripts/install.sh&#8221; script creates symbolic links to the scripts in ~/projects/virtualenv-scripts/global_scripts in the ~/.virtualenvs folder. In the future if new updates are made to the scripts all you need to do to get the updates is:</p>
 <div class="highlight-python"><pre>cd ~/projects/virtualenv-scripts
-gpl</pre>
+gpl origin master</pre>
 </div>
 <p>Where &#8220;gpl&#8221; is the aliases we created above for &#8220;git pull&#8221;.</p>
 </div>
@@ -170,10 +193,7 @@ gpl</pre>
 <li><a class="reference external" href="#pip-and-virtualenv">Pip and Virtualenv</a></li>
 <li><a class="reference external" href="#shortcuts-helper-scripts-and-aliases">Shortcuts, Helper scripts, and Aliases</a><ul>
 <li><a class="reference external" href="#project-location">Project location</a></li>
-<li><a class="reference external" href="#aliases">Aliases</a><ul>
-<li><a class="reference external" href="#git-aliases">Git Aliases</a></li>
-</ul>
-</li>
+<li><a class="reference external" href="#git-shortcuts">Git Shortcuts</a></li>
 <li><a class="reference external" href="#helper-scripts">Helper Scripts</a></li>
 </ul>
 </li>

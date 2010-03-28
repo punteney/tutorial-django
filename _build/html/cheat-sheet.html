@@ -49,22 +49,21 @@
 <h1>Cheat Sheet<a class="headerlink" href="#cheat-sheet" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="virtualenv-virtualenvwrapper-virtualenv-scripts">
 <h2>Virtualenv, Virtualenvwrapper, Virtualenv scripts<a class="headerlink" href="#virtualenv-virtualenvwrapper-virtualenv-scripts" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>workon</li>
-<li>mkvirtualenv</li>
-<li>rmvirtualenv</li>
-</ul>
+<p>workon - Lists all the available virtualenvs</p>
+<p>workon ENV_NAME - Switches to the virtualenv specified by the ENV_NAME <tt class="docutils literal"><span class="pre">workon</span> <span class="pre">zoo</span></tt> would activate the &#8216;zoo&#8217; virtualenv.</p>
+<p>deactivate - Deactivates the current virtualenv.</p>
+<p>mkvirtualenv &#8211;no-site-packages ENV_NAME - Creates a new virtualenv named ENV_NAME, without any of the site wide python packages.</p>
+<p>rmvirtualenv ENV_NAME - Removes the virtualenv named ENV_NAME.</p>
 </div>
 <div class="section" id="git">
 <h2>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h2>
-<p>alias gcm=&#8221;git commit&#8221;
-alias gpl=&#8221;git pull&#8221;
-alias gps=&#8221;git push&#8221;
-alias gpsa=&#8221;git push &#8211;all&#8221;
-alias ga=&#8221;git add&#8221;
-alias gst=&#8221;git status&#8221;
-alias gdf=&#8221;git diff&#8221;
-alias gdiff=&#8221;git diff&#8221;</p>
+<p>gst or git status - Displays the status of the local repository, what files are changed, ready for commit, etc.</p>
+<p>ga or git add - Command to add new or changed files to be committed to the repository.</p>
+<p>gcm or git commit - Command to commit the currently added changes usually use with the &#8220;-m&#8221; flag to append a message <tt class="docutils literal"><span class="pre">gcm</span> <span class="pre">-m</span> <span class="pre">&quot;Fixing</span> <span class="pre">a</span> <span class="pre">broken</span> <span class="pre">link&quot;</span></tt> to the commit.</p>
+<p>gps or git push - Pushes all committed changes on the current branch to the remote repository
+gpsa git push &#8211;all - Same as git push except it pushes all the branches of the repository instead of just the current one.</p>
+<p>gpl or git pull - Pulls changes down from the remote repository and attempts to merge them.</p>
+<p>gdf or gdiff or git diff - Shows the diff between the local file and the committed file. This can specify a single file or the whole repository.</p>
 </div>
 </div>
 
