@@ -84,11 +84,12 @@ Pip and Virtualenv
 `Virtualenvwrapper <http://www.doughellmann.com/projects/virtualenvwrapper/>`_ is  helper app that make it easier to use virtualenv. To install virtualenvwrapper run the following commands::
 
     sudo pip install virtualenvwrapper
+    mkdir ~/.virtualenvs
     echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bashrc
     echo "source /usr/local/bin/virtualenvwrapper_bashrc" >> ~/.bashrc
     source ~/.bashrc
 
-To verify it is installed from the run ``workon`` from the command line.
+To verify it is installed from the run ``workon`` from the command line. It should run and show an output of ``*``.
 
 Shortcuts, Helper scripts, and Aliases
 -----------------------------------------------
