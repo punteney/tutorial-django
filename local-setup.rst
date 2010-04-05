@@ -62,13 +62,20 @@ Once that file is changed start the PostGres Server. This can be done through th
 
 .. admonition:: Database Security
 
-    As this database is just a dev database running locally it's setup without a password allowing anyone with access to the local system to access the database. In most cases this level of security is fine, if more security is needed adjust the pg_hba.conf file to suit the security needs.
+    As this database is just a dev database running locally it's setup without a password allowing anyone with access to the local system to access the database. In most cases this level of security is fine, if more security is needed adjust the pg_hba.conf file to meet the required security needs (`postgres authentication docs <http://www.postgresql.org/docs/8.4/interactive/client-authentication.html>`_).
+
+Finally it's helpful to tell the system where to find the PostgreSQL executable files by adding them to the PATH variable::
+
+    echo "export PATH=$PATH:/Library/PostgresPlus/8.4/bin/" ~/.bashrc
+    PATH=$PATH:/Library/PostgresPlus/8.4/bin/
+
+Note the above lines are for Postgres 8.4 if installing a different version of Postgres make sure to use the correct version number.
 
 As part of the installation `pgAdmin3 <http://www.pgadmin.org/>`_ is installed, this is a gui application that is helpful for managing the postgres databases.
 
 .. admonition:: Other Database System
 
-    Django is fairly agnostic about the database system it uses, so other databases than Postgres can be used. Many develop locally with `sqlite <http://www.sqlite.org/>` for it's ease of setup and then use PostgreSQL, MySQL, Oracle, etc. for production purposes. I use Postgres for development to minimize the differences between the production and dev environment to hopefully find any database specific issues earlier in the process.
+    Django is fairly agnostic about the database system it uses, so other databases than Postgres can be used. Many develop locally with `sqlite <http://www.sqlite.org/>`_ for it's ease of setup and then use PostgreSQL, MySQL, Oracle, etc. for production purposes. I use Postgres for development to minimize the differences between the production and dev environment to hopefully find any database specific issues earlier in the process.
 
 
 Pip and Virtualenv
