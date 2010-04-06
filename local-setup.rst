@@ -66,8 +66,8 @@ Once that file is changed start the PostGres Server. This can be done through th
 
 Finally it's helpful to tell the system where to find the PostgreSQL executable files by adding them to the PATH variable::
 
-    echo "export PATH=$PATH:/Library/PostgresPlus/8.4/bin/" ~/.bashrc
-    PATH=$PATH:/Library/PostgresPlus/8.4/bin/
+    echo "export PATH=$PATH:/Library/PostgreSQL/8.4/bin/" ~/.bashrc
+    PATH=$PATH:/Library/PostgreSQL/8.4/bin/
 
 Note the above lines are for Postgres 8.4 if installing a different version of Postgres make sure to use the correct version number.
 
