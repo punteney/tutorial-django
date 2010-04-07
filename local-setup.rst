@@ -66,7 +66,7 @@ Once that file is changed start the PostGres Server. This can be done through th
 
 Finally it's helpful to tell the system where to find the PostgreSQL executable files by adding them to the PATH variable::
 
-    echo "export PATH=$PATH:/Library/PostgreSQL/8.4/bin/" ~/.bashrc
+    echo "export PATH=$PATH:/Library/PostgreSQL/8.4/bin/" ~/.profile
     PATH=$PATH:/Library/PostgreSQL/8.4/bin/
 
 Note the above lines are for Postgres 8.4 if installing a different version of Postgres make sure to use the correct version number.
@@ -92,9 +92,9 @@ Pip and Virtualenv
 
     sudo pip install virtualenvwrapper
     mkdir ~/.virtualenvs
-    echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bashrc
-    echo "source /usr/local/bin/virtualenvwrapper_bashrc" >> ~/.bashrc
-    source ~/.bashrc
+    echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.profile
+    echo "source /usr/local/bin/virtualenvwrapper_bashrc" >> ~/.profile
+    source ~/.profile
 
 To verify it is installed from the run ``workon`` from the command line. It should run and show an output of ``*``.
 
@@ -110,7 +110,7 @@ Keeping all your projects in the same location allows for easier automation as a
 
 Git Shortcuts
 ^^^^^^^^^^^^^^^^^^^^^^^^
-In general git commands take the format of ``git push`` and ``git commit`` etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the following to the bottom of the ~/.bashrc file::
+In general git commands take the format of ``git push`` and ``git commit`` etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the following to the bottom of the ~/.profile file::
 
     alias gcm="git commit"
     alias gpl="git pull"
