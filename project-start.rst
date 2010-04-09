@@ -2,15 +2,15 @@ Starting a new project
 =======================
 Each new project starts out with the same structure, and base apps installed. Instead of manually creating the project structure and requirements every time I do a new project I've created a base default project on github to use a starting point.
 
-For this tutorial we'll be setting up a very simple zoo site, the project name will be **zoo**.
+For this tutorial we'll be setting up a zoo site, the project name will be **zoo**.
 
 Default project setup
 -----------------------------
-First create the virtualenv for this the zoo project from the terminal type::
+First create the virtualenv for the zoo project from the terminal type::
 
     mkvirtualenv --no-site-packages zoo
     
-This will create a new virtualenv called "zoo" a "zoo" folder in ~/projects and activate the zoo virtualenv and changd into the ~/projects/zoo directory. The "--no-site-packages" flag sets it so that none of the globally installed python packages will be available, setting this flag now is very helpful when moving the project to production. In the future to work on the zoo project just type ``workon zoo`` and it will activate the virtualenv and put you in the ~/projects/zoo directory. When done working on the project run the ``deactivate`` to get out of the virtualenv.
+This will create a new virtualenv called "zoo" a "zoo" folder in ~/projects and activate the zoo virtualenv and change into the ~/projects/zoo directory. The "--no-site-packages" flag sets it so that none of the globally installed python packages will be available, setting this flag now is very helpful when moving the project to production. In the future to work on the zoo project just type ``workon zoo`` and it will activate the virtualenv and put you in the ~/projects/zoo directory. When done working on the project run the ``deactivate`` to get out of the virtualenv.
 
 Next download the default project from github::
 

@@ -1,7 +1,7 @@
 Cheat Sheet
 =================
 
-Virtualenv, Virtualenvwrapper, Virtualenv scripts
+Virtualenv/Virtualenvwrapper
 ----------------------------------------------------
 workon - Lists all the available virtualenvs
 

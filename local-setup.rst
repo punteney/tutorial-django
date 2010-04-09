@@ -29,7 +29,7 @@ To install git follow these steps:
 
 1. Signup for a `github <http://github.com>`_ account if you don't have one already.  
 2. Follow github's `instructions <http://help.github.com/git-installation-redirect>`_ for installing git. Unless you have a specific reason not to I'd recommend using the pre-compiled installer for OS X as that is the easiest install method. 
-3. Once git is is installed follow the github instructions for `generating SSH keys <http://help.github.com/mac-key-setup/>`_
+3. Once git is is installed follow the github instructions for `generating SSH keys <http://github.com/guides/providing-your-ssh-key>`_ and uploading them to github.
 
 .. admonition:: Other Version Control Systems
 
