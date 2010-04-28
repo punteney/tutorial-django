@@ -130,7 +130,7 @@ This will update the project and any requirements, which at this point there sho
 
 
 Creating a Django superuser
--------------------------
+-----------------------------------
 Ssh into the server as the zoo user ``ssh zoo@SERVER_IP_ADDRESS`` and run the following commands to create a superuser for your django project::
 
     workon master
