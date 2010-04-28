@@ -15,10 +15,10 @@ This will create a new virtualenv called "zoo" a "zoo" folder in ~/projects and 
 Next download the default project from github::
 
     workon zoo
-    git clone git://github.com/punteney/tutorial_default_project.git
-    mv tutorial_default_project zoo_site
+    git clone git://github.com/punteney/default_project.git
+    mv default_project zoo_site
     rm -rf zoo_site/.git
-    add2virtualenv zoo_site/apps
+    add2virtualenv zoo_site zoo_site/apps
     
 The first line starts the zoo virtualenv. The second line copies down the base project from github for use. The third line renames the project from "tutorial_default_project" to "zoo_site". The fourth line removes the .git info as this will be a new project and should not continue to update the 'tutorial_default_project' on github. Finally the last line adds the zoo_site/apps directory to the python path for the virtualenv so that python modules within that directory can be called directly.
 
@@ -82,7 +82,7 @@ Go through the base.py file updating the appropriate settings. The ones that com
 
 * ADMINS - The name and email address of the admins for this project, often initially this will just be you and your email.
 * MANAGERS - If different from the ADMINS.
-* EMAIL\_\* - The varioud email sending settings
+* EMAIL\_\* - The various email sending settings
 * TIME_ZONE
 * LANGUAGE_CODE
 * SECRET_KEY - The unique secret key for your project. You can create a secret key using the python interactive shell::
@@ -121,7 +121,7 @@ From the command line run syncdb and create the superuser when it requests it::
     
 Adding the project to Version Control
 -----------------------------------------
-Go to `github <http://github.com>`_ and login if you aren't already logged in. From your github dashboard page click the "create new repository". For the "Project Name" enter 'tutorial_zoo_site', the other fields you can leave blank and leave the access to this repository to be 'Anyone' and create the repository.
+Go to `github <http://github.com>`_ and login if you aren't already logged in. From your github dashboard page click the "new repository" button. For the "Project Name" enter 'tutorial_zoo_site', the other fields you can leave blank and leave the access to this repository to be 'Anyone' and create the repository.
 
 .. note:: 
 
@@ -132,7 +132,7 @@ The next page on github will give you next step directions, some of which have b
     workon zoo
     cd zoo_site
     git init
-    ga *
+    ga * .gitignore
     gcm -m 'Initial commit with default project setup'
     git remote add origin git@github.com:YOUR-GITHUB-USERNAME/tutorial_zoo_site.git
     gps origin master

@@ -66,7 +66,7 @@ Once that file is changed start the PostGres Server. This can be done through th
 
 Finally it's helpful to tell the system where to find the PostgreSQL executable files by adding them to the PATH variable::
 
-    echo "export PATH=$PATH:/Library/PostgreSQL/8.4/bin/" ~/.profile
+    echo "export PATH=$PATH:/Library/PostgreSQL/8.4/bin/" >> ~/.profile
     PATH=$PATH:/Library/PostgreSQL/8.4/bin/
 
 Note the above lines are for Postgres 8.4 if installing a different version of Postgres make sure to use the correct version number.
@@ -127,6 +127,7 @@ Setting git to ignore some file types by default helps keeps the repositories cl
 
     echo "*.DS_Store" >> ~/.gitignore
     echo "*.py[c|o]" >> ~/.gitignore
+    echo "pip-log.txt" >> ~/.gitignore
 
 
 Helper Scripts
