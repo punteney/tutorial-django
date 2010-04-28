@@ -150,4 +150,15 @@ To install the scripts::
 
 Where "gpl" is the aliases we created above for "git pull".
 
+SSH Copy ID
+^^^^^^^^^^^^^^^^^^^^^
+In working with servers it will be required to install copies of your ssh keys on them. While this isn't a hard process there is an easier way to do that. Which is to use the ``ssh-copy-id`` script. Unfortunately OS X doesn't come with the script by default so first we'll need to download it::
+
+    sudo curl http://blog.christopherpitzer.com/wp-content/uploads/ssh-copy-id -o /usr/bin/ssh-copy-id
+    
+And then give it execute permissions::
+
+    sudo chmod a+x /usr/bin/ssh-copy-id
+
+Now it can be used later when setting up new servers and pushing changes.
 
