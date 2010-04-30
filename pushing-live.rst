@@ -1,6 +1,6 @@
 Pushing the Code Live
 **************************
-The instructions are for pushing the project onto a fresh Ubuntu 9.10 server. If using a different, relatively recent, version of Ubuntu it should still work, though it won't have been tested. If using a different linux variant it definitely won't work, but could be made to work with a few changes to use the distribution specific package manager and for different default file locations.
+The instructions are for pushing the project onto a fresh Ubuntu 10.04 server. If using a different, relatively recent, version of Ubuntu it should still work, though it won't have been tested. If using a different linux variant it definitely won't work, but could be made to work with a few changes to use the distribution specific package manager and for different default file locations.
 
 These instructions are for a single server using Nginx as the front proxy and static file server, Apache2 with mod_wsgi for serving the Django project, and a Postgresql database.
 
@@ -14,7 +14,11 @@ Server Setup
 ----------------------------------------
 First step is to setup a server with Ubuntu 9.10 on it. This can be a physical server you own or a virtual server through somebody like `Slicehost <http://www.slicehost.com/>`_, `Rackspace Cloud <http://rackspacecloud.com>`_, of any other virtual server provider. For testing Rackspace Cloud was used.
 
-Once the server is provisioned and ready to go ssh/login as root (Rackspace will send the IP and root password via the email on your account). Once logged in the first thing to do is to change the root password as it was sent in plain text via email::
+Once the server is provisioned and ready to go ssh/login as root (Rackspace will send the IP and root password via the email on your account).::
+
+    ssh root@IP_ADDRESS 
+
+Once logged in the first thing to do is to change the root password as it was sent in plain text via email::
 
     passwd
     
@@ -115,7 +119,6 @@ Ssh back into the server ``ssh zoo@SERVER_IP_ADDRESS`` (or use the existing conn
 
     sudo -u postgres createuser zoo
     sudo -u postgres createdb -O zoo zoo_prod
-    sudo /etc/init.d/postgresql-8.4 reload
 
 The first line creates a user in postgres called 'zoo'. This command will ask you about additional permissions to give this user, in general I recommend answering no to them. The second line creates the database 'zoo_prod' and sets it to be owned by the just created 'zoo' user. 
 
