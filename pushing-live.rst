@@ -113,6 +113,13 @@ To start the server configuration issue the following command locally::
 
 This will install all the needed software, configure the server software, setup the virtual environment, and project.
 
+.. note::
+
+    If using a private github repository ssh keys will need to be installed to allow the server access to the git repository. Generally this is best accomplished using the github's deploy keys. Ssh back into the server as the 'zoo' user and then follow these instructions to generate the keys http://help.github.com/key-setup-redirect 
+    
+    Once the keys are created copy the contents of the public key file ``~/.ssh/id_rsa.pub``. Login to your github account go to the admin section of the repository and select the "deploy keys" and paste the public key in there.
+
+
 Database Creation
 -------------------------
 Ssh back into the server ``ssh zoo@SERVER_IP_ADDRESS`` (or use the existing connection if it's still open) and issue the following commands to create the database user and name::

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -6,18 +8,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>Local Dev Setup &mdash; Django Project Setup v0.1 documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
+        URL_ROOT:    '',
         VERSION:     '0.1',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Django Project Setup v0.1 documentation" href="index.html" />
     <link rel="next" title="Starting a new project" href="project-start.html" />
@@ -38,7 +41,57 @@
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Django Project Setup v0.1 documentation</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Local Dev Setup</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li><a class="reference internal" href="#python">Python</a></li>
+<li><a class="reference internal" href="#text-editor-or-ide">Text Editor or IDE</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#version-and-source-control">Version and Source Control</a></li>
+<li><a class="reference internal" href="#postgresql-database">PostgreSQL Database</a></li>
+<li><a class="reference internal" href="#pip-and-virtualenv">Pip and Virtualenv</a></li>
+<li><a class="reference internal" href="#shortcuts-helper-scripts-and-aliases">Shortcuts, Helper scripts, and Aliases</a><ul>
+<li><a class="reference internal" href="#project-location">Project location</a></li>
+<li><a class="reference internal" href="#git-shortcuts">Git Shortcuts</a></li>
+<li><a class="reference internal" href="#helper-scripts">Helper Scripts</a></li>
+<li><a class="reference internal" href="#ssh-copy-id">SSH Copy ID</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Tutorial for Setting up a Complete Django Project</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="project-start.html"
+                        title="next chapter">Starting a new project</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/local-setup.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -73,7 +126,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 <ol class="arabic simple">
 <li>Signup for a <a class="reference external" href="http://github.com">github</a> account if you don&#8217;t have one already.</li>
 <li>Follow github&#8217;s <a class="reference external" href="http://help.github.com/git-installation-redirect">instructions</a> for installing git. Unless you have a specific reason not to I&#8217;d recommend using the pre-compiled installer for OS X as that is the easiest install method.</li>
-<li>Once git is is installed follow the github instructions for <a class="reference external" href="http://help.github.com/mac-key-setup/">generating SSH keys</a></li>
+<li>Once git is is installed follow the github instructions for <a class="reference external" href="http://github.com/guides/providing-your-ssh-key">generating SSH keys</a> and uploading them to github.</li>
 </ol>
 <div class="admonition-other-version-control-systems admonition ">
 <p class="first admonition-title">Other Version Control Systems</p>
@@ -103,12 +156,17 @@ host    all         all         127.0.0.1/32          trust</pre>
 <p>Once that file is changed start the PostGres Server. This can be done through the &#8220;start server.app&#8221; in the &#8220;Postgres 8.4&#8221; folder in the &#8220;Applications&#8221; folder.</p>
 <div class="admonition-database-security admonition ">
 <p class="first admonition-title">Database Security</p>
-<p class="last">As this database is just a dev database running locally it&#8217;s setup without a password allowing anyone with access to the local system to access the database. In most cases this level of security is fine, if more security is needed adjust the pg_hba.conf file to suit the security needs.</p>
+<p class="last">As this database is just a dev database running locally it&#8217;s setup without a password allowing anyone with access to the local system to access the database. In most cases this level of security is fine, if more security is needed adjust the pg_hba.conf file to meet the required security needs (<a class="reference external" href="http://www.postgresql.org/docs/8.4/interactive/client-authentication.html">postgres authentication docs</a>).</p>
 </div>
+<p>Finally it&#8217;s helpful to tell the system where to find the PostgreSQL executable files by adding them to the PATH variable:</p>
+<div class="highlight-python"><pre>echo "export PATH=$PATH:/Library/PostgreSQL/8.4/bin/" &gt;&gt; ~/.profile
+PATH=$PATH:/Library/PostgreSQL/8.4/bin/</pre>
+</div>
+<p>Note the above lines are for Postgres 8.4 if installing a different version of Postgres make sure to use the correct version number.</p>
 <p>As part of the installation <a class="reference external" href="http://www.pgadmin.org/">pgAdmin3</a> is installed, this is a gui application that is helpful for managing the postgres databases.</p>
 <div class="admonition-other-database-system admonition ">
 <p class="first admonition-title">Other Database System</p>
-<p class="last">Django is fairly agnostic about the database system it uses, so other databases than Postgres can be used. Many develop locally with <cite>sqlite &lt;http://www.sqlite.org/&gt;</cite> for it&#8217;s ease of setup and then use PostgreSQL, MySQL, Oracle, etc. for production purposes. I use Postgres for development to minimize the differences between the production and dev environment to hopefully find any database specific issues earlier in the process.</p>
+<p class="last">Django is fairly agnostic about the database system it uses, so other databases than Postgres can be used. Many develop locally with <a class="reference external" href="http://www.sqlite.org/">sqlite</a> for it&#8217;s ease of setup and then use PostgreSQL, MySQL, Oracle, etc. for production purposes. I use Postgres for development to minimize the differences between the production and dev environment to hopefully find any database specific issues earlier in the process.</p>
 </div>
 </div>
 <div class="section" id="pip-and-virtualenv">
@@ -121,11 +179,12 @@ host    all         all         127.0.0.1/32          trust</pre>
 </div>
 <p><a class="reference external" href="http://www.doughellmann.com/projects/virtualenvwrapper/">Virtualenvwrapper</a> is  helper app that make it easier to use virtualenv. To install virtualenvwrapper run the following commands:</p>
 <div class="highlight-python"><pre>sudo pip install virtualenvwrapper
-echo "export WORKON_HOME=$HOME/.virtualenvs" &gt;&gt; ~/.bashrc
-echo "source /usr/local/bin/virtualenvwrapper_bashrc" &gt;&gt; ~/.bashrc
-source ~/.bashrc</pre>
+mkdir ~/.virtualenvs
+echo "export WORKON_HOME=$HOME/.virtualenvs" &gt;&gt; ~/.profile
+echo "source /usr/local/bin/virtualenvwrapper_bashrc" &gt;&gt; ~/.profile
+source ~/.profile</pre>
 </div>
-<p>To verify it is installed from the run <tt class="docutils literal"><span class="pre">workon</span></tt> from the command line.</p>
+<p>To verify it is installed from the run <tt class="docutils literal"><span class="pre">workon</span></tt> from the command line. It should run and show an output of <tt class="docutils literal"><span class="pre">*</span></tt>.</p>
 </div>
 <div class="section" id="shortcuts-helper-scripts-and-aliases">
 <h2>Shortcuts, Helper scripts, and Aliases<a class="headerlink" href="#shortcuts-helper-scripts-and-aliases" title="Permalink to this headline">¶</a></h2>
@@ -138,7 +197,7 @@ source ~/.bashrc</pre>
 </div>
 <div class="section" id="git-shortcuts">
 <h3>Git Shortcuts<a class="headerlink" href="#git-shortcuts" title="Permalink to this headline">¶</a></h3>
-<p>In general git commands take the format of <tt class="docutils literal"><span class="pre">git</span> <span class="pre">push</span></tt> and <tt class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></tt> etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the following to the bottom of the ~/.bashrc file:</p>
+<p>In general git commands take the format of <tt class="docutils literal"><span class="pre">git</span> <span class="pre">push</span></tt> and <tt class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></tt> etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the following to the bottom of the ~/.profile file:</p>
 <div class="highlight-python"><pre>alias gcm="git commit"
 alias gpl="git pull"
 alias gps="git push"
@@ -151,7 +210,8 @@ alias gdiff="git diff"</pre>
 <p>With these aliases now instead of typing out <tt class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></tt> or <tt class="docutils literal"><span class="pre">git</span> <span class="pre">add</span></tt> you just type <tt class="docutils literal"><span class="pre">gcm</span></tt> or <tt class="docutils literal"><span class="pre">ga</span></tt> respectively. It&#8217;s a small difference but they are commands that are typed often.</p>
 <p>Setting git to ignore some file types by default helps keeps the repositories clean. To ignore .pyc and .DS_Store files for all your repositories on the local system run the following commands:</p>
 <div class="highlight-python"><pre>echo "*.DS_Store" &gt;&gt; ~/.gitignore
-echo "*.py[c|o]" &gt;&gt; ~/.gitignore</pre>
+echo "*.py[c|o]" &gt;&gt; ~/.gitignore
+echo "pip-log.txt" &gt;&gt; ~/.gitignore</pre>
 </div>
 </div>
 <div class="section" id="helper-scripts">
@@ -172,60 +232,21 @@ gpl origin master</pre>
 </div>
 <p>Where &#8220;gpl&#8221; is the aliases we created above for &#8220;git pull&#8221;.</p>
 </div>
+<div class="section" id="ssh-copy-id">
+<h3>SSH Copy ID<a class="headerlink" href="#ssh-copy-id" title="Permalink to this headline">¶</a></h3>
+<p>In working with servers it will be required to install copies of your ssh keys on them. While this isn&#8217;t a hard process there is an easier way to do that. Which is to use the <tt class="docutils literal"><span class="pre">ssh-copy-id</span></tt> script. Unfortunately OS X doesn&#8217;t come with the script by default so first we&#8217;ll need to download it:</p>
+<div class="highlight-python"><pre>sudo curl http://blog.christopherpitzer.com/wp-content/uploads/ssh-copy-id -o /usr/bin/ssh-copy-id</pre>
+</div>
+<p>And then give it execute permissions:</p>
+<div class="highlight-python"><pre>sudo chmod a+x /usr/bin/ssh-copy-id</pre>
+</div>
+<p>Now it can be used later when setting up new servers and pushing changes.</p>
+</div>
 </div>
 </div>
 
 
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Local Dev Setup</a><ul>
-<li><a class="reference external" href="#prerequisites">Prerequisites</a><ul>
-<li><a class="reference external" href="#python">Python</a></li>
-<li><a class="reference external" href="#text-editor-or-ide">Text Editor or IDE</a></li>
-</ul>
-</li>
-<li><a class="reference external" href="#version-and-source-control">Version and Source Control</a></li>
-<li><a class="reference external" href="#postgresql-database">PostgreSQL Database</a></li>
-<li><a class="reference external" href="#pip-and-virtualenv">Pip and Virtualenv</a></li>
-<li><a class="reference external" href="#shortcuts-helper-scripts-and-aliases">Shortcuts, Helper scripts, and Aliases</a><ul>
-<li><a class="reference external" href="#project-location">Project location</a></li>
-<li><a class="reference external" href="#git-shortcuts">Git Shortcuts</a></li>
-<li><a class="reference external" href="#helper-scripts">Helper Scripts</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="index.html"
-                                  title="previous chapter">Tutorial for Setting up a Complete Django Project</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="project-start.html"
-                                  title="next chapter">Starting a new project</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/local-setup.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -246,8 +267,8 @@ gpl origin master</pre>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2010, James Punteney.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+        &copy; Copyright 2010, James Punteney.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0b1.
     </div>
   </body>
 </html>

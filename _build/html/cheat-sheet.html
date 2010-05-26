@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -6,22 +8,23 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>Cheat Sheet &mdash; Django Project Setup v0.1 documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
+        URL_ROOT:    '',
         VERSION:     '0.1',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Django Project Setup v0.1 documentation" href="index.html" />
     <link rel="next" title="Additional Resources" href="learning-resources.html" />
-    <link rel="prev" title="Starting a new project" href="project-start.html" /> 
+    <link rel="prev" title="Ongoing" href="ongoing.html" /> 
   </head>
   <body>
     <div class="related">
@@ -34,11 +37,48 @@
           <a href="learning-resources.html" title="Additional Resources"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="project-start.html" title="Starting a new project"
+          <a href="ongoing.html" title="Ongoing"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Django Project Setup v0.1 documentation</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Cheat Sheet</a><ul>
+<li><a class="reference internal" href="#virtualenv-virtualenvwrapper">Virtualenv/Virtualenvwrapper</a></li>
+<li><a class="reference internal" href="#git">Git</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ongoing.html"
+                        title="previous chapter">Ongoing</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="learning-resources.html"
+                        title="next chapter">Additional Resources</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/cheat-sheet.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -47,8 +87,8 @@
             
   <div class="section" id="cheat-sheet">
 <h1>Cheat Sheet<a class="headerlink" href="#cheat-sheet" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="virtualenv-virtualenvwrapper-virtualenv-scripts">
-<h2>Virtualenv, Virtualenvwrapper, Virtualenv scripts<a class="headerlink" href="#virtualenv-virtualenvwrapper-virtualenv-scripts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="virtualenv-virtualenvwrapper">
+<h2>Virtualenv/Virtualenvwrapper<a class="headerlink" href="#virtualenv-virtualenvwrapper" title="Permalink to this headline">¶</a></h2>
 <p>workon - Lists all the available virtualenvs</p>
 <p>workon ENV_NAME - Switches to the virtualenv specified by the ENV_NAME <tt class="docutils literal"><span class="pre">workon</span> <span class="pre">zoo</span></tt> would activate the &#8216;zoo&#8217; virtualenv.</p>
 <p>deactivate - Deactivates the current virtualenv.</p>
@@ -71,43 +111,6 @@ gpsa git push &#8211;all - Same as git push except it pushes all the branches of
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Cheat Sheet</a><ul>
-<li><a class="reference external" href="#virtualenv-virtualenvwrapper-virtualenv-scripts">Virtualenv, Virtualenvwrapper, Virtualenv scripts</a></li>
-<li><a class="reference external" href="#git">Git</a></li>
-</ul>
-</li>
-</ul>
-
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="project-start.html"
-                                  title="previous chapter">Starting a new project</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="learning-resources.html"
-                                  title="next chapter">Additional Resources</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/cheat-sheet.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -120,14 +123,14 @@ gpsa git push &#8211;all - Same as git push except it pushes all the branches of
           <a href="learning-resources.html" title="Additional Resources"
              >next</a> |</li>
         <li class="right" >
-          <a href="project-start.html" title="Starting a new project"
+          <a href="ongoing.html" title="Ongoing"
              >previous</a> |</li>
         <li><a href="index.html">Django Project Setup v0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2010, James Punteney.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+        &copy; Copyright 2010, James Punteney.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0b1.
     </div>
   </body>
 </html>

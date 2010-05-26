@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -6,21 +8,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <title>Starting a new project &mdash; Django Project Setup v0.1 documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
+        URL_ROOT:    '',
         VERSION:     '0.1',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Django Project Setup v0.1 documentation" href="index.html" />
-    <link rel="next" title="Cheat Sheet" href="cheat-sheet.html" />
+    <link rel="next" title="Building out the Project" href="project-build.html" />
     <link rel="prev" title="Local Dev Setup" href="local-setup.html" /> 
   </head>
   <body>
@@ -31,14 +34,68 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="cheat-sheet.html" title="Cheat Sheet"
+          <a href="project-build.html" title="Building out the Project"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="local-setup.html" title="Local Dev Setup"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Django Project Setup v0.1 documentation</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Starting a new project</a><ul>
+<li><a class="reference internal" href="#default-project-setup">Default project setup</a><ul>
+<li><a class="reference internal" href="#project-structure">Project Structure</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#requirements">Requirements</a><ul>
+<li><a class="reference internal" href="#requirement-files">Requirement Files</a></li>
+<li><a class="reference internal" href="#installing-requirements">Installing Requirements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#project-configuration">Project Configuration</a><ul>
+<li><a class="reference internal" href="#updates-in-base-py">Updates in base.py</a></li>
+<li><a class="reference internal" href="#updates-in-dev-py">Updates in dev.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#database-creation">Database Creation</a><ul>
+<li><a class="reference internal" href="#initial-db-syncing">Initial DB Syncing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#adding-the-project-to-version-control">Adding the project to Version Control</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="local-setup.html"
+                        title="previous chapter">Local Dev Setup</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="project-build.html"
+                        title="next chapter">Building out the Project</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/project-start.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -48,19 +105,19 @@
   <div class="section" id="starting-a-new-project">
 <h1>Starting a new project<a class="headerlink" href="#starting-a-new-project" title="Permalink to this headline">¶</a></h1>
 <p>Each new project starts out with the same structure, and base apps installed. Instead of manually creating the project structure and requirements every time I do a new project I&#8217;ve created a base default project on github to use a starting point.</p>
-<p>For this tutorial we&#8217;ll be setting up a very simple zoo site, the project name will be <strong>zoo</strong>.</p>
+<p>For this tutorial we&#8217;ll be setting up a zoo site, the project name will be <strong>zoo</strong>.</p>
 <div class="section" id="default-project-setup">
 <h2>Default project setup<a class="headerlink" href="#default-project-setup" title="Permalink to this headline">¶</a></h2>
-<p>First create the virtualenv for this the zoo project from the terminal type:</p>
+<p>First create the virtualenv for the zoo project from the terminal type:</p>
 <div class="highlight-python"><pre>mkvirtualenv --no-site-packages zoo</pre>
 </div>
-<p>This will create a new virtualenv called &#8220;zoo&#8221; a &#8220;zoo&#8221; folder in ~/projects and activate the zoo virtualenv and changd into the ~/projects/zoo directory. The &#8220;&#8211;no-site-packages&#8221; flag sets it so that none of the globally installed python packages will be available, setting this flag now is very helpful when moving the project to production. In the future to work on the zoo project just type <tt class="docutils literal"><span class="pre">workon</span> <span class="pre">zoo</span></tt> and it will activate the virtualenv and put you in the ~/projects/zoo directory. When done working on the project run the <tt class="docutils literal"><span class="pre">deactivate</span></tt> to get out of the virtualenv.</p>
+<p>This will create a new virtualenv called &#8220;zoo&#8221; a &#8220;zoo&#8221; folder in ~/projects and activate the zoo virtualenv and change into the ~/projects/zoo directory. The &#8220;&#8211;no-site-packages&#8221; flag sets it so that none of the globally installed python packages will be available, setting this flag now is very helpful when moving the project to production. In the future to work on the zoo project just type <tt class="docutils literal"><span class="pre">workon</span> <span class="pre">zoo</span></tt> and it will activate the virtualenv and put you in the ~/projects/zoo directory. When done working on the project run the <tt class="docutils literal"><span class="pre">deactivate</span></tt> to get out of the virtualenv.</p>
 <p>Next download the default project from github:</p>
 <div class="highlight-python"><pre>workon zoo
-git clone git://github.com/punteney/tutorial_default_project.git
-mv tutorial_default_project zoo_site
+git clone git://github.com/punteney/default_project.git
+mv default_project zoo_site
 rm -rf zoo_site/.git
-add2virtualenv zoo_site/apps</pre>
+add2virtualenv zoo_site zoo_site/apps</pre>
 </div>
 <p>The first line starts the zoo virtualenv. The second line copies down the base project from github for use. The third line renames the project from &#8220;tutorial_default_project&#8221; to &#8220;zoo_site&#8221;. The fourth line removes the .git info as this will be a new project and should not continue to update the &#8216;tutorial_default_project&#8217; on github. Finally the last line adds the zoo_site/apps directory to the python path for the virtualenv so that python modules within that directory can be called directly.</p>
 <div class="section" id="project-structure">
@@ -169,7 +226,7 @@ pip install -r zoo_site/deploy/requirements_dev.txt</pre>
 <ul class="simple">
 <li>ADMINS - The name and email address of the admins for this project, often initially this will just be you and your email.</li>
 <li>MANAGERS - If different from the ADMINS.</li>
-<li>EMAIL_* - The varioud email sending settings</li>
+<li>EMAIL_* - The various email sending settings</li>
 <li>TIME_ZONE</li>
 <li>LANGUAGE_CODE</li>
 <li>SECRET_KEY - The unique secret key for your project. You can create a secret key using the python interactive shell:</li>
@@ -218,7 +275,7 @@ cd zoo_site/project/
 </div>
 <div class="section" id="adding-the-project-to-version-control">
 <h2>Adding the project to Version Control<a class="headerlink" href="#adding-the-project-to-version-control" title="Permalink to this headline">¶</a></h2>
-<p>Go to <a class="reference external" href="http://github.com">github</a> and login if you aren&#8217;t already logged in. From your github dashboard page click the &#8220;create new repository&#8221;. For the &#8220;Project Name&#8221; enter &#8216;tutorial_zoo_site&#8217;, the other fields you can leave blank and leave the access to this repository to be &#8216;Anyone&#8217; and create the repository.</p>
+<p>Go to <a class="reference external" href="http://github.com">github</a> and login if you aren&#8217;t already logged in. From your github dashboard page click the &#8220;new repository&#8221; button. For the &#8220;Project Name&#8221; enter &#8216;tutorial_zoo_site&#8217;, the other fields you can leave blank and leave the access to this repository to be &#8216;Anyone&#8217; and create the repository.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">By setting the repository to be viewable by anyone any information that is within the repository will be public, so <strong>do not</strong> use the actual secret key or database passwords that are used for anything other than this sample project locally. On actual projects the source code repository will either be private and secure or you can use the local.py settings file to keep the private information out of the repository.</p>
@@ -227,7 +284,7 @@ cd zoo_site/project/
 <div class="highlight-python"><pre>workon zoo
 cd zoo_site
 git init
-ga *
+ga * .gitignore
 gcm -m 'Initial commit with default project setup'
 git remote add origin git@github.com:YOUR-GITHUB-USERNAME/tutorial_zoo_site.git
 gps origin master</pre>
@@ -247,60 +304,6 @@ gps origin master</pre>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Starting a new project</a><ul>
-<li><a class="reference external" href="#default-project-setup">Default project setup</a><ul>
-<li><a class="reference external" href="#project-structure">Project Structure</a></li>
-</ul>
-</li>
-<li><a class="reference external" href="#requirements">Requirements</a><ul>
-<li><a class="reference external" href="#requirement-files">Requirement Files</a></li>
-<li><a class="reference external" href="#installing-requirements">Installing Requirements</a></li>
-</ul>
-</li>
-<li><a class="reference external" href="#project-configuration">Project Configuration</a><ul>
-<li><a class="reference external" href="#updates-in-base-py">Updates in base.py</a></li>
-<li><a class="reference external" href="#updates-in-dev-py">Updates in dev.py</a></li>
-</ul>
-</li>
-<li><a class="reference external" href="#database-creation">Database Creation</a><ul>
-<li><a class="reference external" href="#initial-db-syncing">Initial DB Syncing</a></li>
-</ul>
-</li>
-<li><a class="reference external" href="#adding-the-project-to-version-control">Adding the project to Version Control</a></li>
-</ul>
-</li>
-</ul>
-
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="local-setup.html"
-                                  title="previous chapter">Local Dev Setup</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="cheat-sheet.html"
-                                  title="next chapter">Cheat Sheet</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/project-start.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -310,7 +313,7 @@ gps origin master</pre>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="cheat-sheet.html" title="Cheat Sheet"
+          <a href="project-build.html" title="Building out the Project"
              >next</a> |</li>
         <li class="right" >
           <a href="local-setup.html" title="Local Dev Setup"
@@ -319,8 +322,8 @@ gps origin master</pre>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2010, James Punteney.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+        &copy; Copyright 2010, James Punteney.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0b1.
     </div>
   </body>
 </html>

@@ -29,7 +29,7 @@ To install git follow these steps:
 
 1. Signup for a `github <http://github.com>`_ account if you don't have one already.  
 2. Follow github's `instructions <http://help.github.com/git-installation-redirect>`_ for installing git. Unless you have a specific reason not to I'd recommend using the pre-compiled installer for OS X as that is the easiest install method. 
-3. Once git is is installed follow the github instructions for `generating SSH keys <http://help.github.com/mac-key-setup/>`_
+3. Once git is is installed follow the github instructions for `generating SSH keys <http://github.com/guides/providing-your-ssh-key>`_ and uploading them to github.
 
 .. admonition:: Other Version Control Systems
 
@@ -62,13 +62,20 @@ Once that file is changed start the PostGres Server. This can be done through th
 
 .. admonition:: Database Security
 
-    As this database is just a dev database running locally it's setup without a password allowing anyone with access to the local system to access the database. In most cases this level of security is fine, if more security is needed adjust the pg_hba.conf file to suit the security needs.
+    As this database is just a dev database running locally it's setup without a password allowing anyone with access to the local system to access the database. In most cases this level of security is fine, if more security is needed adjust the pg_hba.conf file to meet the required security needs (`postgres authentication docs <http://www.postgresql.org/docs/8.4/interactive/client-authentication.html>`_).
+
+Finally it's helpful to tell the system where to find the PostgreSQL executable files by adding them to the PATH variable::
+
+    echo "export PATH=$PATH:/Library/PostgreSQL/8.4/bin/" >> ~/.profile
+    PATH=$PATH:/Library/PostgreSQL/8.4/bin/
+
+Note the above lines are for Postgres 8.4 if installing a different version of Postgres make sure to use the correct version number.
 
 As part of the installation `pgAdmin3 <http://www.pgadmin.org/>`_ is installed, this is a gui application that is helpful for managing the postgres databases.
 
 .. admonition:: Other Database System
 
-    Django is fairly agnostic about the database system it uses, so other databases than Postgres can be used. Many develop locally with `sqlite <http://www.sqlite.org/>` for it's ease of setup and then use PostgreSQL, MySQL, Oracle, etc. for production purposes. I use Postgres for development to minimize the differences between the production and dev environment to hopefully find any database specific issues earlier in the process.
+    Django is fairly agnostic about the database system it uses, so other databases than Postgres can be used. Many develop locally with `sqlite <http://www.sqlite.org/>`_ for it's ease of setup and then use PostgreSQL, MySQL, Oracle, etc. for production purposes. I use Postgres for development to minimize the differences between the production and dev environment to hopefully find any database specific issues earlier in the process.
 
 
 Pip and Virtualenv
@@ -84,11 +91,12 @@ Pip and Virtualenv
 `Virtualenvwrapper <http://www.doughellmann.com/projects/virtualenvwrapper/>`_ is  helper app that make it easier to use virtualenv. To install virtualenvwrapper run the following commands::
 
     sudo pip install virtualenvwrapper
-    echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bashrc
-    echo "source /usr/local/bin/virtualenvwrapper_bashrc" >> ~/.bashrc
-    source ~/.bashrc
+    mkdir ~/.virtualenvs
+    echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.profile
+    echo "source /usr/local/bin/virtualenvwrapper_bashrc" >> ~/.profile
+    source ~/.profile
 
-To verify it is installed from the run ``workon`` from the command line.
+To verify it is installed from the run ``workon`` from the command line. It should run and show an output of ``*``.
 
 Shortcuts, Helper scripts, and Aliases
 -----------------------------------------------
@@ -102,7 +110,7 @@ Keeping all your projects in the same location allows for easier automation as a
 
 Git Shortcuts
 ^^^^^^^^^^^^^^^^^^^^^^^^
-In general git commands take the format of ``git push`` and ``git commit`` etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the following to the bottom of the ~/.bashrc file::
+In general git commands take the format of ``git push`` and ``git commit`` etc. Some git commands are used very frequently while working on a project, by creating aliases for these common commands it saves a little time. Add the following to the bottom of the ~/.profile file::
 
     alias gcm="git commit"
     alias gpl="git pull"
@@ -119,6 +127,7 @@ Setting git to ignore some file types by default helps keeps the repositories cl
 
     echo "*.DS_Store" >> ~/.gitignore
     echo "*.py[c|o]" >> ~/.gitignore
+    echo "pip-log.txt" >> ~/.gitignore
 
 
 Helper Scripts
@@ -141,4 +150,15 @@ To install the scripts::
 
 Where "gpl" is the aliases we created above for "git pull".
 
+SSH Copy ID
+^^^^^^^^^^^^^^^^^^^^^
+In working with servers it will be required to install copies of your ssh keys on them. While this isn't a hard process there is an easier way to do that. Which is to use the ``ssh-copy-id`` script. Unfortunately OS X doesn't come with the script by default so first we'll need to download it::
+
+    sudo curl http://blog.christopherpitzer.com/wp-content/uploads/ssh-copy-id -o /usr/bin/ssh-copy-id
+    
+And then give it execute permissions::
+
+    sudo chmod a+x /usr/bin/ssh-copy-id
+
+Now it can be used later when setting up new servers and pushing changes.
 

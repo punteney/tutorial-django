@@ -9,17 +9,17 @@ This tutorial focuses on how to setup and manage your django project. It doesn't
 
 #. :doc:`Setting up a local dev environment (on OS X) <local-setup>`
 #. :doc:`Starting a new project <project-start>`
-#. Building out the project
-#. Testing
-#. Documentation
-#. Pushing the project to production
-#. Ongoing work process
+#. :doc:`Building out the project <project-build>`
+#. :doc:`Testing <testing>`
+#. :doc:`Documentation <documentation>`
+#. :doc:`Pushing the project to production <pushing-live>`
+#. :doc:`Ongoing work process <ongoing>`
 
 The tutorial will be easier to follow with a basic understanding of python, Django, and command line usage. If you aren't familiar with these you might want to check out some of the :doc:`resources <learning-resources>` to familiarize yourself with them first first.
 
 .. note:: 
 
-    This tutorial is **how I** set things up. It describes methods I've picked up over the last 3 or 4 years that work well for me. There are many other equally valid methods to use so take this tutorial as a guide. If something doesn't work for your process change it, if there is a better way to accomplish something let me know.
+    This tutorial is **how I** set things up. It describes methods I've picked up over the last 3 or 4 years that work well for me. There are many other equally valid methods to use. Take this tutorial as a guide, if something doesn't work for your process change it, if there is a better way to accomplish something let me know.
 
 
 Contents:
@@ -29,6 +29,11 @@ Contents:
     
     local-setup.rst
     project-start.rst
+    project-build.rst
+    testing.rst
+    documentation.rst
+    pushing-live.rst
+    ongoing.rst
     cheat-sheet.rst
     learning-resources.rst
     
