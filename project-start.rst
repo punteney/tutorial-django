@@ -18,9 +18,9 @@ Next download the default project from github::
     git clone git://github.com/punteney/default_project.git
     mv default_project zoo_site
     rm -rf zoo_site/.git
-    add2virtualenv zoo_site zoo_site/apps
+    add2virtualenv zoo_site/site zoo_site/apps
     
-The first line starts the zoo virtualenv. The second line copies down the base project from github for use. The third line renames the project from "tutorial_default_project" to "zoo_site". The fourth line removes the .git info as this will be a new project and should not continue to update the 'tutorial_default_project' on github. Finally the last line adds the zoo_site/apps directory to the python path for the virtualenv so that python modules within that directory can be called directly.
+The first line starts the zoo virtualenv. The second line copies down the base project from github for use. The third line renames the project from "tutorial_default_project" to "zoo_site". The fourth line removes the .git info as this will be a new project and should not continue to update the 'tutorial_default_project' on github. Finally the last line adds the zoo_site/site and zoo_site/apps directory to the python path for the virtualenv so that python modules within those directory can be called directly.
 
 Project Structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -32,24 +32,24 @@ Each project starts with the same default file structure. Later sections will ex
         * **apps**\ / - This folder will hold any django apps or python modules used for the project that aren't installed using pip. Often this will be apps specific to this project that aren't meant to be reusable.
             * **utils**\ / - Holds various one off items and helpers for the project that aren't big enough to be their own apps or modules.
         * **config**\ / - Holds various config files for things like Apache, nginx, wsgi, memcache, etc.
-        * **deploy**\ / - This folder holds the fabric file and requirements files along with any other items used in the deployment process.
+        * **requiremets**\ / - This folder holds the fabric file and requirements files along with any other items used in the deployment process.
     * **docs**\ / - This folder is empty initially but is there to hold the generated documents for the project.
 
 
 Requirements
 -------------------------------
-There are two `pip requirements files <http://pip.openplans.org/#requirements-files>`_ in the deploy folder that contain the needed packages to be installed.
+There are two `pip requirements files <http://pip.openplans.org/#requirements-files>`_ in the requirements folder that contain the needed packages to be installed.
 
 Requirement Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-* requirements_all.txt - Contains the required python modules that should be installed on all systems that this project is installed on (dev, staging, production). It contains the following items:
+* production.txt - Contains the required python modules that should be installed on all systems that this project is installed on (dev, staging, production). It contains the following items:
     * `Django <http://www.djangoproject.com/>`_ - The latest released version of Django
     * `ipython <http://ipython.scipy.org/moin/>`_ - An enhanced interactive python shell
     * `python-memcached <http://pypi.python.org/pypi/python-memcached>`_ - A fully python memcache client
     * `south <http://south.aeracode.org/>`_ - Database migrations for django.
     
-* requirements_dev.txt - Contains the requirements only needed on the dev server. Most of the items in this file are items to make debugging and testing easier which aren't needed on the servers.
-    * `psycopg2 <http://initd.org/psycopg/>`_ - A database drive for PostgreSQL. On the servers the driver is installed through the OS packages, so it does not need to installed through pip on them.
+* dev.txt - Contains the requirements only needed on the dev server. Most of the items in this file are items to make debugging and testing easier which aren't needed on the servers.
+    * `psycopg2 <http://initd.org/psycopg/>`_ - A database driver for PostgreSQL. On the servers the driver is installed through the OS packages, so it does not need to installed through pip on them.
     * `django-debug-toolbar <http://github.com/robhudson/django-debug-toolbar>`_ - A huge help for debugging and optimizing a django site.
     * `werkseug <http://pypi.python.org/pypi/Werkzeug/>`_ - A debugger that that supports interactive debugging on the error pages.
     * `django-extensions <http://pypi.python.org/pypi/django-extensions/>`_ - Various helpful command extensions to django.
@@ -60,8 +60,8 @@ Installing Requirements
 To install the requirements issue the following commands::
 
     workon zoo
-    pip install -r zoo_site/deploy/requirements_all.txt
-    pip install -r zoo_site/deploy/requirements_dev.txt
+    pip install -r zoo_site/requirements/production.txt
+    pip install -r zoo_site/requirements/dev.txt
 
 Project Configuration
 --------------------------------
