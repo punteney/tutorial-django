@@ -1,9 +1,0 @@
-Cheat Sheet
-=================
-
-Virtualenv, Virtualenvwrapper, Virtualenv scripts
-----------------------------------------------------
-
-* workon
-* mkvirtualenv
-* rmvirtualenv
