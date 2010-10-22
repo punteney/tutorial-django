@@ -67,7 +67,7 @@ Installing Requirements
 To install the requirements issue the following commands::
 
     workon zoo
-    pip install -r zoo_site/requirements/dev.txt
+    pip install -r zoo/requirements/dev.txt
 
 Project Configuration
 --------------------------------
