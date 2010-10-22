@@ -40,42 +40,20 @@ To install git follow these steps:
     
     Neither Subversion or Mercurial are needed for this tutorial, but at somepoint you will probably need to install and interact with them.
 
-PostgreSQL Database
+SQLite Database
 --------------------------
-`PostgreSQL <http://www.postgresql.org/>`_ will be the database for the project. An `OS X binary install file is available <http://www.postgresql.org/download/macosx>`_, install it with the default options. 
+`SQLite <http://www.sqlite.org/>`_ will be the dev database used for the project. SQLite is included with python 2.5 and later.
 
-Once the installation has finished edit the '/Library/PostgreSQL/8.4/data/pg_hba.conf' file (you'll need to do this using 'sudo' to have the rights to edit the file ``sudo nano /Library/PostgreSQL/8.4/data/pg_hba.conf``). Scroll down towards the bottom of the file until you see these lines::
+.. admonition:: Production Database Setup
 
-    # "local" is for Unix domain socket connections only
-    local   all         all                               md5
-    # IPv4 local connections:
-    host    all         all         127.0.0.1/32          md5
+    SQLite is great and easy to use as a dev database but should not be used for your production database. `PostgreSQL <http://www.postgresql.org/>`_ will be used later in this tutorial for the production server.
+    
 
-Change those line so instead of requiring md5 passwords they are trusted connections::
-
-    # "local" is for Unix domain socket connections only
-    local   all         all                               trust
-    # IPv4 local connections:
-    host    all         all         127.0.0.1/32          trust
-
-Once that file is changed start the PostGres Server. This can be done through the "start server.app" in the "Postgres 8.4" folder in the "Applications" folder.
-
-.. admonition:: Database Security
-
-    As this database is just a dev database running locally it's setup without a password allowing anyone with access to the local system to access the database. In most cases this level of security is fine, if more security is needed adjust the pg_hba.conf file to meet the required security needs (`postgres authentication docs <http://www.postgresql.org/docs/8.4/interactive/client-authentication.html>`_).
-
-Finally it's helpful to tell the system where to find the PostgreSQL executable files by adding them to the PATH variable::
-
-    echo "export PATH=$PATH:/Library/PostgreSQL/8.4/bin/" >> ~/.profile
-    PATH=$PATH:/Library/PostgreSQL/8.4/bin/
-
-Note the above lines are for Postgres 8.4 if installing a different version of Postgres make sure to use the correct version number.
-
-As part of the installation `pgAdmin3 <http://www.pgadmin.org/>`_ is installed, this is a gui application that is helpful for managing the postgres databases.
+SQLite is a self contained serverless database so it will just be a file in your project directory.
 
 .. admonition:: Other Database System
 
-    Django is fairly agnostic about the database system it uses, so other databases than Postgres can be used. Many develop locally with `sqlite <http://www.sqlite.org/>`_ for it's ease of setup and then use PostgreSQL, MySQL, Oracle, etc. for production purposes. I use Postgres for development to minimize the differences between the production and dev environment to hopefully find any database specific issues earlier in the process.
+    Django is fairly agnostic about the database system it uses, use SQLite locally for development as quick an efficient. For production many different databases can be used with Django including: PostgreSQL, MySQL, and Oracle.
 
 
 Pip and Virtualenv
@@ -93,10 +71,10 @@ Pip and Virtualenv
     sudo pip install virtualenvwrapper
     mkdir ~/.virtualenvs
     echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.profile
-    echo "source /usr/local/bin/virtualenvwrapper_bashrc" >> ~/.profile
+    echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.profile
     source ~/.profile
 
-To verify it is installed from the run ``workon`` from the command line. It should run and show an output of ``*``.
+To verify it is installed from the run ``workon`` from the command line. It should run and show an output of ``*``. Detailed installation instructions can be found `here <http://www.doughellmann.com/docs/virtualenvwrapper/install.html>`_
 
 Shortcuts, Helper scripts, and Aliases
 -----------------------------------------------
@@ -104,7 +82,7 @@ Items to minimize repetitive tasks and keystrokes.
 
 Project location
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Keeping all your projects in the same location allows for easier automation as an assumption can be made as to the location of the projects. For this tutorial we'll use a "projects" folder created within your home directory. To create the folder run the following:: 
+Keeping all your projects in the same location on your drive allows for easier automation as an assumption can be made as to the location of the project files. For this tutorial we'll use a "projects" folder in the home directory. To create the folder run the following:: 
 
     mkdir ~/projects
 
@@ -152,7 +130,7 @@ Where "gpl" is the aliases we created above for "git pull".
 
 SSH Copy ID
 ^^^^^^^^^^^^^^^^^^^^^
-In working with servers it will be required to install copies of your ssh keys on them. While this isn't a hard process there is an easier way to do that. Which is to use the ``ssh-copy-id`` script. Unfortunately OS X doesn't come with the script by default so first we'll need to download it::
+In working with servers it will be required to install copies of your ssh keys on them. While this isn't a hard process to do manually there is an easier way. Use the ``ssh-copy-id`` script. Download ssh-copy-id::
 
     sudo curl http://blog.christopherpitzer.com/wp-content/uploads/ssh-copy-id -o /usr/bin/ssh-copy-id
     

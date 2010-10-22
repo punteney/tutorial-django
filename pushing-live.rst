@@ -12,7 +12,7 @@ Production
 
 Server Setup
 ----------------------------------------
-First step is to setup a server with Ubuntu 9.10 on it. This can be a physical server you own or a virtual server through somebody like `Slicehost <http://www.slicehost.com/>`_, `Rackspace Cloud <http://rackspacecloud.com>`_, of any other virtual server provider. For testing Rackspace Cloud was used.
+First step is to setup a server with Ubuntu 10.04 on it. This can be a physical server you own or a virtual server through somebody like `Slicehost <http://www.slicehost.com/>`_, `Rackspace Cloud <http://rackspacecloud.com>`_, of any other virtual server providers. For testing Rackspace Cloud was used.
 
 Once the server is provisioned and ready to go ssh/login as root (Rackspace will send the IP and root password via the email on your account).::
 
@@ -30,9 +30,8 @@ The second step is to install a firewall. Ubuntu provides the `Uncomplicated Fir
     ufw default deny
     ufw allow ssh/tcp
     ufw enable
-    ufw allow 80
 
-The first line installs ufw, the second line says by default we want to block everything coming in. The third line enables ssh access on the default port of 22. The fourth line enables the firewall. The last line opens up port 80 for http website traffic. If you need ssl access to the site you'll want to run the command ``ufw allow 443``.
+The first line installs ufw, the second line says by default we want to block everything coming in. The third line enables ssh access on the default port of 22.
 
 .. note::
 
@@ -64,17 +63,17 @@ From this point on most of the server installation and configuration will be don
 
 Updating in the config files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Most of the changes here are to set the path to files properly. Where ever there is a 'USERNAME' replace it with 'zoo' where ever there is a 'PROJECT_NAME' replace it with 'zoo_site'.
+Most of the changes here are to set the path to files properly. Where ever there is a 'USERNAME' replace it with 'zoo' where ever there is a 'PROJECT_NAME' replace it with 'zoo'.
 
-* zoo_site/config/apache/production/django_site.conf
-    * WSGIScriptAlias - set it to ``WSGIScriptAlias / /home/zoo/zoo_site/live/config/wsgi/production/django_site.py``
-* zoo_site/config/nginx/production/django_site.conf
-    * In the ``location ~ ^/(favicon.ico|robots.txt|sitemap.xml)`` directive set the root to be ``root /home/zoo/zoo_site/live/project/media;``
-    * In the ``location /media`` directive set the root to be ``root /home/zoo/zoo_site/live/project/media;``
+* zoo/config/apache/production/django_site.conf
+    * WSGIScriptAlias - set it to ``WSGIScriptAlias / /home/zoo/zoo/live/config/wsgi/production/django_site.py``
+* zoo/config/nginx/production/django_site.conf
+    * In the ``location ~ ^/(favicon.ico|robots.txt|sitemap.xml)`` directive set the root to be ``root /home/zoo/zoo/live/website/media;``
+    * In the ``location /media`` directive set the root to be ``root /home/zoo/zoo/live/website/media;``
 
 .. note::
 
-    A global search and replace on the config directory for '/USERNAME/PROJECTNAME/' and replace with '/zoo/zoo_site/' will work for the above changes.
+    A global search and replace on the config directory for '/USERNAME/PROJECTNAME/' and replace with '/zoo/zoo/' will work for the above changes.
     
 Updating the production settings file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -88,12 +87,12 @@ The DATABASE_PASSWORD doesn't need to be set as Postgres will be set to trust lo
 
 Updating the fabfile
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The fabfile.py (in the root of the 'zoo_site' directory) is currently empty. Copy the contents of `default_fabfile.py <http://github.com/punteney/fabric_helpers/blob/master/default_fabfile.py>`_ into the fabfile.py. Once copied over change these settings:
+The fabfile.py (in the root of the 'zoo' directory) is currently empty. Copy the contents of `default_fabfile.py <http://github.com/punteney/fabric_helpers/blob/master/default_fabfile.py>`_ into the fabfile.py. Once copied over change these settings:
 
-* USER - set it to 'zoo' (this needs to match the username used in the config files)
-* env.project_name - set it to 'zoo_site' (this needs to match the project name used in the config files)
+* USER - set it to 'zoo' (this needs to match the username previous created and used in the config files)
+* env.project_name - set it to 'zoo (this needs to match the project name used in the config files)
 * MACHINES - in the machine line replace the 'SERVER IP OR HOSTNAME HERE' with the created servers public IP address or the hostname for the server.
-* env.git_repo - the git repo path from github
+* env.git_repo - the git repo path to this project's repository on github
 
 Pushing project changes to github
 --------------------------------------
@@ -127,7 +126,7 @@ Ssh back into the server ``ssh zoo@SERVER_IP_ADDRESS`` (or use the existing conn
     sudo -u postgres createuser zoo
     sudo -u postgres createdb -O zoo zoo_prod
 
-The first line creates a user in postgres called 'zoo'. This command will ask you about additional permissions to give this user, in general I recommend answering no to them. The second line creates the database 'zoo_prod' and sets it to be owned by the just created 'zoo' user. 
+The first line creates a user in postgres called 'zoo'. This command will ask you about additional permissions to give this user, unless you have a specific reason otherwise just answer "no" to them. The second line creates the database 'zoo_prod' and sets it to be owned by the just created 'zoo' user. 
 
 Pushing the project
 --------------------------
@@ -136,7 +135,7 @@ To push the project live issue the following command from your local system::
     workon zoo
     fab production push
     
-This will update the project and any requirements, which at this point there shouldn't be any changes, and then run syncdb to create the database tables.
+This will update the project and any needed requirements, which at this point there shouldn't be any changes, and then run syncdb to create the database tables.
 
 
 Creating a Django superuser
@@ -144,14 +143,14 @@ Creating a Django superuser
 Ssh into the server as the zoo user ``ssh zoo@SERVER_IP_ADDRESS`` and run the following commands to create a superuser for your django project::
 
     workon master
-    cd ~/zoo_site/live/project/
+    cd ~/zoo/live/website/
     ./manage.py createsuperuser
 
 Answer the questions it asks for creating the superuser.
 
 Access the admin
 --------------------
-At this point the project should be working. To test go to http://SERVER_IP_O_HOSTNAME/admin/ and is should show you the login form for the admin. Login using the superuser you created above.
+At this point the project should be working. To test go to http://SERVER_IP_OR_HOSTNAME/admin/ and is should show you the login form for the admin. Login using the superuser you created above.
 
 
 
@@ -162,7 +161,7 @@ There are two primary commands for pushing ongoing changes 'push' and 'push_quic
 * **push**, as mentioned above, will update all the project requirements installing newer versions and adding any new modules, it will also run the syncdb command updating the database with any new tables. Then finally restart the servers (not the physical servers, but the software servers, ).
 * **push_quick** will pull the newest version of the project code, but does not try to install or upgrade the project requirements or run syncdb. Once completed it also only reloads the servers that need to be reloaded for a code change.
 
-If new requirements have been added to the project or there are new apps/database tables, or if I'm unsure if there have been changes I will use 'push'. Otherwise, I use push_quick as it's quicker and the server restarts are a bit quicker and cleaner.
+If new requirements have been added to the project or there are new apps/database tables, or if unsure if there have been changes use 'push'. Otherwise, use push_quick as it's quicker and the server restarts are a bit quicker and cleaner.
 
 Test
 ^^^^^^^^^^^^^^^
