@@ -53,7 +53,7 @@ SQLite is a self contained serverless database so it will just be a file in your
 
 .. admonition:: Other Database System
 
-    Django is fairly agnostic about the database system it uses, use SQLite locally for development as quick an efficient. For production many different databases can be used with Django including: PostgreSQL, MySQL, and Oracle.
+    Django is fairly agnostic about the database system it uses, using SQLite locally for development is quick and efficient. For production many different databases can be used with Django including: PostgreSQL, MySQL, and Oracle.
 
 
 Pip and Virtualenv

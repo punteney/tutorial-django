@@ -9,11 +9,14 @@ Python
     * `Tutorial <http://docs.python.org/tutorial/>`_ - An introductory tutorial
     * `Library Reference <http://docs.python.org/library/index.html>`_
 
-`Dive into Python <http://diveintopython.org/>`_ - The full text is available online. This is a good book if you're already familiar with programming but not with Python.
+`Learn Python The Hard Way <http://learnpythonthehardway.org/>` A book by Zed Shaw that teaches Python by having the reader write Python code.
 
 `Learning Python <http://www.amazon.com/Learning-Python-Powerful-Object-Oriented-Programming/dp/0596158068>`_ - This is the book I learned Python from.
 
 `Google Python Class <http://code.google.com/edu/languages/google-python-class/>`_ - A free class for people with a little bit of programming experience who want to learn Python.
+
+`Dive into Python <http://diveintopython.org/>`_ - The full text is available online. This is a good book if you're already familiar with programming but not with Python.
+
 
 Django
 ----------------------

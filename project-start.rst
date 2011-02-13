@@ -1,6 +1,6 @@
 Starting a new project
 =======================
-Each new project starts out with the same structure, and base apps installed. Instead of manually creating the project structure and requirements every time I do a new project I've created a base default project on github to use a starting point.
+Each new project starts out with the same structure, and base apps installed. Instead of manually creating the project structure and requirements every time I use a default project on github as the starting point.
 
 For this tutorial we'll be setting up a zoo site, the project name will be **zoo**.
 
@@ -33,7 +33,7 @@ Each project starts with the same default file structure. Later sections will ex
             * **utils**\ / - Holds various one off items and helpers for the project that aren't big enough to be their own apps or modules.
         * **config**\ / - Holds various config files for things like Apache, nginx, wsgi, memcache, etc.
         * **requirements**\ / - This folder holds the requirements files for packages that should be installed by pip.
-        * **bin**\ / - This folder holders any scripts or executables for the project.
+        * **bin**\ / - This folder holds any scripts or executables for the project.
             * **dserv**\ / - Shortcut command for the ``website/manage.py runserver`` command
             * **dshell**\ / - Shortcut command for the ``website/manage.py shell`` command
             * **reset_db**\ / - Shortcut command for deleting the dev.db then running syncdb and migrate, and loading the test data fixtures.
@@ -79,7 +79,7 @@ Now that the default project is installed we need to configure it. All the setti
         * dev.py - Settings specific to the dev environment. 
         * production.py - Settings specific to the production environment
         * staging.py - Settings specific to the staging environment
-    * local.py - This is for settings that are specific to the server or settings that shouldn't be included in the repository. The most common settings for local.py are the database password and secret key, if the source code repository isn't secure. local.py is the last settings file included so any settings in it will override any previously defined settings. If  a local.py settings is needed it should be created in the "website/settings" folder. As this file isn't kept in the source control system you want to minimize the number of settings kept in this file.
+    * local.py - This is for settings that are specific to the server or settings that shouldn't be included in the repository. The most common settings for local.py are the database password and secret key, if the source code repository isn't secure. local.py is the last settings file included so any settings in it will override any previously defined settings. If  a local.py settings is needed it should be created in the "website/settings" folder. As this file isn't kept in the source control system you want to minimize the number of settings kept within it.
 
 
 Updates in base.py
